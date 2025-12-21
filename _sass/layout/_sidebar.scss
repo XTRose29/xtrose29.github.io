@@ -112,7 +112,7 @@
     min-height: 175px; // Ensure container has height
 
     @include breakpoint($large) {
-      min-height: auto;
+      min-height: 175px; // Keep min-height even on large screens
     }
 
     .author__avatar-img {
@@ -170,6 +170,9 @@
 
     // Clicked: show real
     &.avatar-show-real {
+      height: 175px !important; // Force container height
+      min-height: 175px !important;
+
       .author__avatar-img {
         opacity: 0 !important;
         visibility: hidden !important;
@@ -186,6 +189,7 @@
         width: 100% !important;
         height: 100% !important;
         max-width: 175px !important;
+        aspect-ratio: 1 / 1 !important;
       }
     }
   }

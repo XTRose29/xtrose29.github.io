@@ -26,7 +26,7 @@ author:
   avatar           : "profile.png"
   name             : "Tianruo Rose Xu"
   pronouns         : # example: "she/her"  
-  bio              : "Undergraduate Researcher in Computer Science at Cornell University. Working on Natural Language Processing, Large Language Models, and Machine Learning."
+  bio              : "Undergraduate Researcher in Computer Science at Cornell University."
   location         : "Ithaca, NY, USA"
   employer         : "Cornell University"
   uri              : "https://rosexu.github.io"
@@ -51,7 +51,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "rosexu"
+  github           : "XTRose29"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
@@ -66,7 +66,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "xtrose"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
@@ -125,7 +125,7 @@ staticman:
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
+  hide                   : true     # change to true to hide the RSS feed in the footer
   path                   : # blank (default) uses feed.xml
 
 

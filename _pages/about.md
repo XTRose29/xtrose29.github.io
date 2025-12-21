@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Tianruo Rose Xu - Academic Homepage"
+title: "Tianruo Rose Xu"
 author_profile: true
 redirect_from: 
   - /about/
@@ -9,7 +9,9 @@ redirect_from:
 
 ## About Me
 
-I am an undergraduate student at Cornell University, College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics (expected graduation: May 2027). I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, supervised by Professor Tanya Goyal.
+I am an undergraduate student at Cornell University, College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by [Professor Tanya Goyal](https://tagoyal.github.io/).
+
+I am a [Hunter R. Rawlings III Cornell Presidential Research Scholar](https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars), which recognizes exceptional undergraduate researchers at Cornell.
 
 ## Research Interests
 

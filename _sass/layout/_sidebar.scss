@@ -156,13 +156,16 @@
     // Clicked: show real
     &.avatar-show-real {
       .author__avatar-img {
-        display: none;
+        display: none !important;
         opacity: 0;
       }
 
       .author__avatar-hover {
-        display: block;
+        display: block !important;
         opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     }
   }

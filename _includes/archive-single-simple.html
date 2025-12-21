@@ -1,20 +1,20 @@
 {% include base_path %}
 
 {% if post.collection == 'teaching' %}
-  <p><strong>{{ post.title }}</strong><br />
-  {{ post.type }}{% if post.semester %}, {{ post.semester }}{% endif %}</p>
+<p><strong>{{ post.title }}</strong><br />
+{{ post.type }}{% if post.semester %}, {{ post.semester }}{% endif %}</p>
 {% elsif post.collection == 'publications' %}
   {% if post.citation %}
     {% assign citation = post.citation | remove: '&quot;' | remove: '<i>' | remove: '</i>' | remove: '&amp;' %}
     {% assign my_name = "Tianruo Rose Xu" %}
     {% assign name_parts = citation | split: my_name %}
     {% if name_parts.size > 1 %}
-      <p>{{ name_parts[0] }}<strong>{{ my_name }}</strong>{{ name_parts[1] }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
+<p>{{ name_parts[0] }}<strong>{{ my_name }}</strong>{{ name_parts[1] }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
     {% else %}
-      <p>{{ citation }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
+<p>{{ citation }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
     {% endif %}
   {% else %}
-    <p><strong>{{ post.title }}</strong><br />
-    Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
+<p><strong>{{ post.title }}</strong><br />
+Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} <a href="{{ base_path }}{{ post.url }}">[Details]</a></p>
   {% endif %}
 {% endif %}

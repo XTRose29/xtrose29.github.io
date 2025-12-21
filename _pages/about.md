@@ -9,7 +9,7 @@ redirect_from:
 
 ## About Me
 
-Hi! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University in College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I also collaborate with the <a href="https://pi.cs.tsinghua.edu.cn/" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.
+Hi! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I also collaborate with the <a href="https://pi.cs.tsinghua.edu.cn/" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.
 
 ## Research Interests
 

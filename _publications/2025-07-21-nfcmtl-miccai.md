@@ -7,7 +7,7 @@ excerpt: 'Published in MICCAI 2025 Workshop MSB EMERGE. Runner-up Best Paper Awa
 date: 2025-07-21
 venue: 'MICCAI 2025 Workshop MSB EMERGE'
 paperurl: 
-citation: 'Yingke Ding, Jiankai Tang, Wanying Mo, Tianruo Rose Xu, Yuanchun Shi, Yuntao Wang. (2025). &quot;NFCMTL: Auto NailFold Capillaroscopy through a Multi-Task Learning Model.&quot; <i>MICCAI 2025 Workshop MSB EMERGE</i>, July 21, 2025.'
+citation: 'Yingke Ding, Jiankai Tang, Wanying Mo, Tianruo Rose Xu, Yuanchun Shi, Yuntao Wang. NFCMTL: Auto NailFold Capillaroscopy through a Multi-Task Learning Model. MICCAI 2025 Workshop MSB EMERGE, July 21, 2025.'
 award: 'Runner-up Best Paper, MICCAI 2025 Workshop MSB EMERGE'
 ---
 

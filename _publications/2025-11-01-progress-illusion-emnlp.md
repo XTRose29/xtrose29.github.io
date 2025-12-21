@@ -8,7 +8,7 @@ date: 2025-11-01
 venue: 'Findings of the Association for Computational Linguistics: EMNLP 2025'
 paperurl: 'https://aclanthology.org/2025.findings-emnlp.1036/'
 posterurl: 
-citation: 'Tianruo Rose Xu, Vedant Gaur, Liu Leqi, Tanya Goyal. (2025). &quot;The Progress Illusion: Revisiting Meta-Evaluation Standards of LLM Evaluators.&quot; <i>Findings of the Association for Computational Linguistics: EMNLP 2025</i>, Suzhou, China.'
+citation: 'Tianruo Rose Xu, Vedant Gaur, Liu Leqi, Tanya Goyal. The Progress Illusion: Revisiting Meta-Evaluation Standards of LLM Evaluators. Findings of the Association for Computational Linguistics: EMNLP 2025, Suzhou, China, November 2025.'
 share: false
 hide_auto_published: true
 ---

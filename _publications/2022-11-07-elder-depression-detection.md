@@ -8,6 +8,8 @@ date: 2022-11-07
 venue: 'BCP Education & Psychology'
 paperurl: 
 citation: 'Tianruo Xu. Elder Depression Detection by Multimodal Means. BCP Education & Psychology, November 7, 2022.'
+share: false
+hide_auto_published: true
 ---
 
 Used NLP, audio, and video data to detect depression in the elderly.

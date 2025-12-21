@@ -9,9 +9,7 @@ redirect_from:
 
 ## About Me
 
-I am an undergraduate student at Cornell University, College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by [Professor Tanya Goyal](https://tagoyal.github.io/).
-
-I am a [Hunter R. Rawlings III Cornell Presidential Research Scholar](https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars), which recognizes exceptional undergraduate researchers at Cornell.
+Hi! I am a Rawlings Presidential Research Scholar at Cornell University in College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by [Professor Tanya Goyal](https://tagoyal.github.io/).
 
 ## Research Interests
 
@@ -39,8 +37,6 @@ B.S. in Computer Science, Minor: Mathematics
 
 ## Publications
 
-{% include base_path %}
-
 {% if site.publication_category %}
   {% for category in site.publication_category  %}
     {% assign title_shown = false %}
@@ -52,19 +48,19 @@ B.S. in Computer Science, Minor: Mathematics
         <h3>{{ category[1].title }}</h3>
         {% assign title_shown = true %}
       {% endunless %}
-      {% include archive-single.html %}
+      {% include archive-single-simple.html %}
     {% endfor %}
   {% endfor %}
 {% else %}
   {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+    {% include archive-single-simple.html %}
   {% endfor %}
 {% endif %}
 
 ## Teaching Experience
 
 {% for post in site.teaching reversed %}
-  {% include archive-single.html %}
+  {% include archive-single-simple.html %}
 {% endfor %}
 
 ## Contact

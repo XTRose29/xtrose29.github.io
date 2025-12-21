@@ -1,0 +1,8 @@
+{% if post.collection == 'teaching' %}
+  <p><strong>{{ post.title }}</strong><br />
+  {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}</p>
+{% elsif post.collection == 'publications' %}
+  <p><strong>{{ post.title }}</strong><br />
+  Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}</p>
+{% endif %}
+

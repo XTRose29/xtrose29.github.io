@@ -6,10 +6,14 @@
 {% elsif post.collection == 'publications' %}
   {% if post.citation %}
     {% assign citation = post.citation | remove: '&quot;' | remove: '<i>' | remove: '</i>' | remove: '&amp;' %}
-    {% assign my_name = "Tianruo Rose Xu" %}
-    {% assign name_parts = citation | split: my_name %}
-    {% if name_parts.size > 1 %}
-<p>{{ name_parts[0] }}<strong>{{ my_name }}</strong>{{ name_parts[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
+    {% assign my_name_full = "Tianruo Rose Xu" %}
+    {% assign my_name_short = "Tianruo Xu" %}
+    {% assign name_parts_full = citation | split: my_name_full %}
+    {% assign name_parts_short = citation | split: my_name_short %}
+    {% if name_parts_full.size > 1 %}
+<p>{{ name_parts_full[0] }}<strong>{{ my_name_full }}</strong>{{ name_parts_full[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
+    {% elsif name_parts_short.size > 1 %}
+<p>{{ name_parts_short[0] }}<strong>{{ my_name_short }}</strong>{{ name_parts_short[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
     {% else %}
 <p>{{ citation }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
     {% endif %}

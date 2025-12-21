@@ -28,7 +28,9 @@ layout: default
         <header>
           {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
           {% if page.show_paper_link and page.paperurl %}
-            <p><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">View Full Text</a></p>
+            <p><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">View Full Text</a>{% if page.codeurl %} | <a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a>{% endif %}</p>
+          {% elsif page.codeurl %}
+            <p><a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a></p>
           {% endif %}
           {% if page.read_time %}
             <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
@@ -75,7 +77,9 @@ layout: default
         {% elsif page.bibtexurl %}
           <p style="font-size: smaller"><a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
         {% elsif page.paperurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a></p>
+          <p style="font-size: smaller"><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a>{% if page.codeurl %} | <a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a>{% endif %}</p>
+        {% elsif page.codeurl %}
+          <p style="font-size: smaller"><a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a></p>
         {% endif %}
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn" target="_blank" rel="noopener noreferrer">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}

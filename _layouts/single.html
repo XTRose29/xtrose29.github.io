@@ -52,32 +52,20 @@ layout: default
       <section class="page__content" itemprop="text">
         {{ content }}
 
-        {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a> | <a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a> | <a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a></p>
-        {% elsif page.citation and page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a></p>
-        {% elsif page.citation and page.slidesurl and page.bibtexurl %}
+        {% if page.citation and page.slidesurl and page.bibtexurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
         {% elsif page.citation and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a></p>
-        {% elsif page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
-        {% elsif page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
         {% elsif page.citation and page.bibtexurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
         {% elsif page.citation %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}</p>
+        {% elsif page.slidesurl and page.bibtexurl %}
+          <p style="font-size: smaller"><a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a> | <a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
         {% elsif page.slidesurl %}
           <p style="font-size: smaller"><a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Download Slides</a></p>
         {% elsif page.bibtexurl %}
           <p style="font-size: smaller"><a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">Download Bibtex</a></p>
-        {% elsif page.paperurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Download Paper</a>{% if page.codeurl %} | <a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a>{% endif %}</p>
         {% elsif page.codeurl %}
           <p style="font-size: smaller"><a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer">Code</a></p>
         {% endif %}

@@ -145,11 +145,14 @@
       .author__avatar-img {
         display: block;
         opacity: 1;
+        position: relative;
+        z-index: 1;
       }
 
       .author__avatar-hover {
-        display: none;
+        display: none !important;
         opacity: 0;
+        visibility: hidden;
       }
     }
 
@@ -158,14 +161,17 @@
       .author__avatar-img {
         display: none !important;
         opacity: 0;
+        visibility: hidden;
       }
 
       .author__avatar-hover {
         display: block !important;
         opacity: 1;
+        visibility: visible;
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 2;
       }
     }
   }
@@ -191,7 +197,7 @@
 
   @include breakpoint($large) {
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }
 .sidebar .author__name {

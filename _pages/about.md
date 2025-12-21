@@ -37,6 +37,36 @@ B.S. in Computer Science, Minor: Mathematics
 - Platinum division, Full Score in USA Computing Olympiad (USACO) 2023 January Gold Contest
 - USA Mathematical Olympiad Qualifier (USAMO)
 
+## Publications
+
+{% include base_path %}
+
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% for post in site.publications reversed %}
+      {% if post.category != category[0] %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h3>{{ category[1].title }}</h3>
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in site.publications reversed %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endif %}
+
+## Teaching Experience
+
+{% for post in site.teaching reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
 ## Contact
 
 - **Email**: tx88@cornell.edu

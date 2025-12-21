@@ -128,6 +128,9 @@
       {% endif %}      
       {% if author.linkedin %}
         <li><a href="https://www.linkedin.com/in/{{ author.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin icon-pad-right" aria-hidden="true"></i>LinkedIn</a></li>
+      {% endif %}
+      {% if author.cv %}
+        <li><a href="{{ author.cv | prepend: base_path }}" target="_blank" rel="noopener noreferrer"><i class="fas fa-fw fa-file-pdf icon-pad-right" aria-hidden="true"></i>View Full CV</a></li>
       {% endif %}      
       {% if author.mastodon %}
         <li><a href="{{ author.mastodon }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-mastodon icon-pad-right" aria-hidden="true"></i>Mastodon</a></li>

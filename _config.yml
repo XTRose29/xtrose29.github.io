@@ -30,7 +30,8 @@ author:
   location         : "Ithaca, NY, USA"
   employer         : "Cornell University"
   uri              : "https://rosexu.github.io"
-  email            : "tx88@cornell.edu" 
+  email            : "tx88@cornell.edu"
+  cv               : "/files/Xu_Tianruo_Rose.pdf" 
 
   # Academic websites
   academia         : # URL

@@ -113,7 +113,6 @@
     .author__avatar-img {
       max-width: 175px;
       width: 100%;
-      height: auto;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
@@ -133,7 +132,6 @@
       left: 0;
       max-width: 175px;
       width: 100%;
-      height: auto;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
@@ -150,10 +148,11 @@
     // Default: show cartoon
     &.avatar-show-cartoon {
       .author__avatar-img {
-        display: block;
+        display: block !important;
         opacity: 1;
         position: relative;
         z-index: 1;
+        visibility: visible;
       }
 
       .author__avatar-hover {
@@ -179,7 +178,6 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: auto;
         z-index: 2;
       }
     }

@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Tianruo Rose Xu 徐天若"
+title: "Tianruo Rose Xu"
 author_profile: true
 redirect_from: 
   - /about/

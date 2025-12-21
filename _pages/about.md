@@ -25,8 +25,6 @@ My research focuses on:
 Aug 2024 – May 2027 (expected)  
 B.S. in Computer Science, Minor: Mathematics
 
-**Relevant Coursework**: Data structures, algorithms, operating systems, computer systems, machine learning, natural language processing, quantum computing, probability and statistics, multivariable calculus, linear algebra, differential equations, logic, cognitive science, linguistics, language and thought.
-
 ## Awards and Honors
 
 - <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Hunter R. Rawlings III Cornell Presidential Research Scholar Award</a>

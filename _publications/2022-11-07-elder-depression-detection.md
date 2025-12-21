@@ -11,6 +11,7 @@ citation: 'Tianruo Xu. Elder Depression Detection by Multimodal Means. BCP Educa
 share: false
 hide_auto_published: true
 show_paper_link: true
+author_profile: true
 ---
 
 ## Abstract

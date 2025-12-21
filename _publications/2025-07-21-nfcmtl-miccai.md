@@ -13,6 +13,7 @@ award: 'Runner-up Best Paper, MICCAI 2025 Workshop MSB EMERGE'
 share: false
 hide_auto_published: true
 show_paper_link: true
+author_profile: true
 ---
 
 ## Abstract

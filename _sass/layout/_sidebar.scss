@@ -117,8 +117,9 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center;
-      transition: opacity 0.3s ease;
-      display: block;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      position: relative;
+      z-index: 1;
 
       @include breakpoint($large) {
         padding: 5px;
@@ -136,8 +137,8 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center;
-      transition: opacity 0.3s ease;
-      display: none;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 2;
 
       @include breakpoint($large) {
         padding: 5px;
@@ -148,15 +149,11 @@
     // Default: show cartoon
     &.avatar-show-cartoon {
       .author__avatar-img {
-        display: block !important;
         opacity: 1;
-        position: relative;
-        z-index: 1;
         visibility: visible;
       }
 
       .author__avatar-hover {
-        display: none !important;
         opacity: 0;
         visibility: hidden;
       }
@@ -165,20 +162,13 @@
     // Clicked: show real
     &.avatar-show-real {
       .author__avatar-img {
-        display: none !important;
         opacity: 0;
         visibility: hidden;
       }
 
       .author__avatar-hover {
-        display: block !important;
         opacity: 1;
         visibility: visible;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 2;
       }
     }
   }

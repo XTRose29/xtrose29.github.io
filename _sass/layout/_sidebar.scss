@@ -102,6 +102,45 @@
       border: 1px solid var(--global-border-color);
     }
   }
+
+  &.author__avatar--hover {
+    position: relative;
+
+    .author__avatar-img {
+      max-width: 175px;
+      border-radius: 50%;
+      transition: opacity 0.3s ease;
+
+      @include breakpoint($large) {
+        padding: 5px;
+        border: 1px solid var(--global-border-color);
+      }
+    }
+
+    .author__avatar-hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 175px;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+
+      @include breakpoint($large) {
+        padding: 5px;
+        border: 1px solid var(--global-border-color);
+      }
+    }
+
+    &:hover .author__avatar-hover {
+      opacity: 1;
+    }
+
+    &:hover .author__avatar-img {
+      opacity: 0;
+    }
+  }
 }
 
 .author__content {

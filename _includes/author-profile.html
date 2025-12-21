@@ -6,11 +6,18 @@
 
 <div itemscope itemtype="http://schema.org/Person">
 
-  <div class="author__avatar">
+  <div class="author__avatar{% if author.avatar_hover %} author__avatar--hover{% endif %}">
     {% if author.avatar contains "://" %}
-    	<img src="{{ author.avatar }}" alt="{{ author.name }}"  fetchpriority="high" />
+    	<img src="{{ author.avatar }}" alt="{{ author.name }}" class="author__avatar-img" fetchpriority="high" />
     {% else %}
-    	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
+    	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar-img" alt="{{ author.name }}" fetchpriority="high" />
+    {% endif %}
+    {% if author.avatar_hover %}
+      {% if author.avatar_hover contains "://" %}
+        <img src="{{ author.avatar_hover }}" alt="{{ author.name }}" class="author__avatar-hover" fetchpriority="high" />
+      {% else %}
+        <img src="{{ author.avatar_hover | prepend: "/images/" | prepend: base_path }}" class="author__avatar-hover" alt="{{ author.name }}" fetchpriority="high" />
+      {% endif %}
     {% endif %}
   </div>
 

@@ -112,6 +112,9 @@
     .author__avatar-img {
       max-width: 175px;
       border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
       transition: opacity 0.3s ease;
 
       @include breakpoint($large) {
@@ -126,6 +129,9 @@
       left: 0;
       max-width: 175px;
       border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
       transition: opacity 0.3s ease;
 
       @include breakpoint($large) {

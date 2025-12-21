@@ -22,7 +22,7 @@ My research focuses on:
 ## 🎓 Education
 
 **Cornell University, College of Engineering**  
-Aug 2024 – May 2027 (expected)  
+Aug 2024 - present  
 B.S. in Computer Science, Minor: Mathematics
 
 ## 🏆 Awards and Honors

@@ -103,7 +103,7 @@
     }
   }
 
-  &.author__avatar--hover {
+  &.author__avatar--clickable {
     position: relative;
 
     .author__avatar-img {
@@ -123,9 +123,7 @@
       left: 0;
       max-width: 175px;
       border-radius: 50%;
-      opacity: 0;
       transition: opacity 0.3s ease;
-      pointer-events: none;
 
       @include breakpoint($large) {
         padding: 5px;
@@ -133,12 +131,30 @@
       }
     }
 
-    &:hover .author__avatar-hover {
-      opacity: 1;
+    // Default: show cartoon
+    &.avatar-show-cartoon {
+      .author__avatar-img {
+        display: block;
+        opacity: 1;
+      }
+
+      .author__avatar-hover {
+        display: none;
+        opacity: 0;
+      }
     }
 
-    &:hover .author__avatar-img {
-      opacity: 0;
+    // Clicked: show real
+    &.avatar-show-real {
+      .author__avatar-img {
+        display: none;
+        opacity: 0;
+      }
+
+      .author__avatar-hover {
+        display: block;
+        opacity: 1;
+      }
     }
   }
 }

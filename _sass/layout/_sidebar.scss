@@ -108,14 +108,18 @@
 
   &.author__avatar--clickable {
     position: relative;
+    overflow: hidden;
 
     .author__avatar-img {
       max-width: 175px;
+      width: 100%;
+      height: auto;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center;
       transition: opacity 0.3s ease;
+      display: block;
 
       @include breakpoint($large) {
         padding: 5px;
@@ -128,11 +132,14 @@
       top: 0;
       left: 0;
       max-width: 175px;
+      width: 100%;
+      height: auto;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center;
       transition: opacity 0.3s ease;
+      display: none;
 
       @include breakpoint($large) {
         padding: 5px;

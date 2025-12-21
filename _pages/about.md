@@ -17,7 +17,7 @@ My research focuses on:
 - **Natural Language Processing**: Analyzing and improving reasoning-based Large Language Models
 - **LLM Evaluation**: Meta-evaluation of automatic benchmarks and evaluators
 - **Multimodal Learning**: Integrating vision and language for medical applications
-- **AI Agents and Tool Orchestration**: Intelligent AI tool benchmarking and orchestration platforms, tool matching and execution, multi-tool workflow orchestration, and AI agent systems
+- **AI Agents and Tool Orchestration**: Tool matching, execution, and multi-tool workflow orchestration
 
 ## Education
 

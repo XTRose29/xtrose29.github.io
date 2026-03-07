@@ -73,6 +73,9 @@
       {% endif %}
 
       <!-- Font Awesome icons / Repositories and software development -->
+      {% if author.github %}
+        <li><a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>GitHub</a></li>
+      {% endif %}
       {% if author.bitbucket %}
         <li><a href="https://bitbucket.org/{{ author.bitbucket }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-bitbucket icon-pad-right" aria-hidden="true"></i>Bitbucket</a></li>
       {% endif %}

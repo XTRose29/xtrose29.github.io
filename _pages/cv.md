@@ -28,7 +28,7 @@ Research Experience
   * **Analyzing Verbalized Uncertainty and Factuality in Reasoning-based LLMs** (2025 – present)
     * Supervised by Professor Tanya Goyal; collaborating with Anirudh Atmakuru
     * Serve as project lead: design a multi-step pipeline to analyze verbalized uncertainty in LLM thinking traces, implement data processing and FactScore-based factuality evaluation, run large-scale experiments across multiple reasoning models, and train/analyze lightweight classifiers for uncertainty and factuality prediction
-    * Accepted for presentation at the AAAI-26 Undergraduate Consortium (Singapore, 2026)
+    * Published in Proceedings of AAAI 2026 (AAAI-40), Singapore, 2026
   
   * **Revisiting Meta-Evaluation Standards of LLM Evaluators** (2025)
     * Supervised by Professor Tanya Goyal, in collaboration with Professor Liu Leqi (UT Austin) and Vedant Gaur (University of Pennsylvania)

@@ -7,7 +7,7 @@ excerpt: 'Published in Proceedings of AAAI 2026 (open access).'
 date: 2026-01-01
 venue: 'Proceedings of the AAAI Conference on Artificial Intelligence'
 paperurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/42331'
-citation: 'Xu, T. R. (2026). Can You Trust What I Think? Analyzing and Improving Verbalized Uncertainty and Factuality in Reasoning-Based Large Language Models. Proceedings of the AAAI Conference on Artificial Intelligence, 40(48), 41534-41536. https://doi.org/10.1609/aaai.v40i48.42331'
+citation: 'Xu, Tianruo Rose. (2026). Can You Trust What I Think? Analyzing and Improving Verbalized Uncertainty and Factuality in Reasoning-Based Large Language Models. Proceedings of the AAAI Conference on Artificial Intelligence, 40(48), 41534-41536. https://doi.org/10.1609/aaai.v40i48.42331'
 share: false
 hide_auto_published: true
 show_paper_link: true

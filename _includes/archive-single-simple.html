@@ -6,16 +6,23 @@
 {% elsif post.collection == 'publications' %}
   {% if post.citation %}
     {% assign citation = post.citation | remove: '&quot;' | remove: '<i>' | remove: '</i>' | remove: '&amp;' %}
+    {% comment %}List view: hide trailing URL so lines match other entries; full citation unchanged in each post's front matter.{% endcomment %}
+    {% assign citation_display = citation | split: " https://" | first %}
+    {% assign citation_display = citation_display | split: " http://" | first %}
     {% assign my_name_full = "Tianruo Rose Xu" %}
     {% assign my_name_short = "Tianruo Xu" %}
-    {% assign name_parts_full = citation | split: my_name_full %}
-    {% assign name_parts_short = citation | split: my_name_short %}
+    {% assign my_name_apa = "Xu, T. R." %}
+    {% assign name_parts_full = citation_display | split: my_name_full %}
+    {% assign name_parts_short = citation_display | split: my_name_short %}
+    {% assign name_parts_apa = citation_display | split: my_name_apa %}
     {% if name_parts_full.size > 1 %}
 <p>{{ name_parts_full[0] }}<strong>{{ my_name_full }}</strong>{{ name_parts_full[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
     {% elsif name_parts_short.size > 1 %}
 <p>{{ name_parts_short[0] }}<strong>{{ my_name_short }}</strong>{{ name_parts_short[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
+    {% elsif name_parts_apa.size > 1 %}
+<p>{{ name_parts_apa[0] }}<strong>{{ my_name_apa }}</strong>{{ name_parts_apa[1] }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
     {% else %}
-<p>{{ citation }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
+<p>{{ citation_display }} <a href="{{ base_path }}{{ post.url }}" target="_blank" rel="noopener noreferrer">[Details]</a></p>
     {% endif %}
   {% else %}
 <p><strong>{{ post.title }}</strong><br />

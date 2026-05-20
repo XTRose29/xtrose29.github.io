@@ -9,15 +9,17 @@ redirect_from:
 
 ## 👋 About Me
 
-Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. I am currently working as an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, and I am honored to be supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I am involved in the <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a> at Cornell, and I also collaborate with the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.  
+Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in the College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. My research interests broadly lie in natural language processing, trustworthy AI, machine learning, and multimodal intelligent systems.
+
+I am currently an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I am also involved in Cornell's <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a>, and I collaborate with the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University and work with <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a> at UC San Diego.
 
 ## 🔬 Research Interests
 
 My research focuses on:
-- **Natural Language Processing**: Analyzing and improving reasoning-based Large Language Models
-- **LLM Evaluation**: Meta-evaluation of automatic benchmarks and evaluators
-- **Multimodal Learning**: Integrating vision and language for medical applications
-- **AI Agents and Tool**: Intelligent AI tool platforms and agent systems
+- **Trustworthy and Reliable AI**: Studying factuality, uncertainty, safety, and robustness in intelligent systems
+- **AI Agents and Tools**: Building systems that can use tools, coordinate workflows, and support human decision-making
+- **Multimodal Machine Learning**: Integrating language, vision, and other modalities for real-world applications
+- **AI for Science and Mathematics**: Applying machine learning to support scientific reasoning and mathematical workflows
 
 ## 🎓 Education
 
@@ -44,4 +46,3 @@ B.S. in Computer Science, Minor: Mathematics
 {% for post in site.teaching reversed %}
   {% include archive-single-simple.html %}
 {% endfor %}
-

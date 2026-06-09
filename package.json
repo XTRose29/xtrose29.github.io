@@ -1,25 +1,18 @@
 {
-  "name": "academic-pages",
-  "version": "0.8.1.1",
-  "description": "Academic Pages Mistakes Jekyll theme npm build scripts",
+  "name": "xtrose29.github.io",
+  "version": "1.0.0",
+  "description": "JavaScript build scripts for Tianruo Rose Xu's Jekyll site",
   "repository": {
     "type": "git",
-    "url": "https://github.com/academicpages/academicpages.github.io"
+    "url": "https://github.com/XTRose29/xtrose29.github.io"
   },
   "keywords": [
     "jekyll",
-    "theme",
-    "minimal"
-  ],
-  "contributors": [
-    "Michael Rose",
-    "Robert Zupko"
+    "academic",
+    "website"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/academicpages/academicpages.github.io/issues"
-  },
-  "homepage": "https://github.com/academicpages/academicpages.github.io",
+  "homepage": "https://xtrose29.github.io",
   "engines": {
     "node": ">= 0.10.0"
   },

@@ -11,7 +11,7 @@ redirect_from:
 
 Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in the College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. 
 
-I am currently an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I am also involved in Cornell's <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a>, and I collaborate with the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University and work with <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a> at UC San Diego.
+I am an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I also involve in Cornell's <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a>, and collaborate with the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University and work with <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a> at UC San Diego.
 
 ## 🔬 Research Interests
 

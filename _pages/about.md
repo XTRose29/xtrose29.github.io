@@ -9,9 +9,14 @@ redirect_from:
 
 ## 👋 About Me
 
-Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in the College of Engineering, pursuing a B.S. in Computer Science with a minor in Mathematics. 
+Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in the College of Engineering, studying Computer Science and Mathematics. 
 
-I am an undergraduate researcher in the Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. I also involve in Cornell's <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a>, and collaborate with the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University and work with <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a> at UC San Diego.
+## 📚 Research Experience
+
+- Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. 
+- Q-Lab at UC San Diego, supervised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
+- <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a> at Cornell's Department of Mathematics. 
+- <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.
 
 ## 🔬 Research Interests
 
@@ -27,7 +32,10 @@ My research focuses on:
 Aug 2024 - present  
 B.S. in Computer Science, Minor: Mathematics
 
-## 🏆 Awards and Honors
+**United World College of South East Asia, Dover Campus**
+Aug 2021 - May 2024
+
+## 🏆 Honors and Awards 
 
 - <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Hunter R. Rawlings III Cornell Presidential Research Scholar Award</a>
 - <a href="https://news.cornell.edu/stories/2021/11/grant-will-support-female-student-research-computing" target="_blank" rel="noopener noreferrer">Clare Booth Luce (CBL) Undergraduate Research Award</a>
@@ -35,7 +43,7 @@ B.S. in Computer Science, Minor: Mathematics
 - Platinum division, Full Score in <a href="https://usaco.org/current/data/jan23_gold_results.html" target="_blank" rel="noopener noreferrer">USA Computing Olympiad (USACO) 2023 January Gold Contest</a>
 - USA Mathematical Olympiad Qualifier (USAMO)
 
-## 📚 Publications
+## 📄 Publications
 
 {% for post in site.publications reversed %}
   {% include archive-single-simple.html %}

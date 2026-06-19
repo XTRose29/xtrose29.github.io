@@ -13,7 +13,7 @@ Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/raw
 
 ## 📚 Research Experience
 
-- Natural Language Processing Group at Cornell's Computer Science Department, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. 
+- Natural Language Processing Group at Cornell's, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. 
 - Q-Lab at UC San Diego, supervised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 - <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a> at Cornell's Department of Mathematics. 
 - <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.

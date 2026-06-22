@@ -14,26 +14,24 @@ Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/raw
 ## 📚 Research Experience
 
 - Natural Language Processing Group at Cornell, supervised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a>. 
-- Q-Lab at UC San Diego, supervised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
-- <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a> at Cornell's Department of Mathematics. 
-- <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.
+- Q-Lab and the <a href="https://simworld.org/" target="_blank" rel="noopener noreferrer">SimWorld</a> Team at UC San Diego, supervised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
+- <a href="https://danielhl.github.io/math-ai.html" target="_blank" rel="noopener noreferrer">Math + AI Lab</a> at Cornell, supervised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>. 
+- Collaborating with researchers in the <a href="https://github.com/thuhci" target="_blank" rel="noopener noreferrer">PI Lab</a> at Tsinghua University.
 
 ## 🔬 Research Interests
 
 My research focuses on:
-- **Trustworthy and Reliable AI**: Studying factuality, uncertainty, safety, and robustness in intelligent systems
-- **AI Agents and Tools**: Building systems that can use tools, coordinate workflows, and support human decision-making
-- **Multimodal Machine Learning**: Integrating language, vision, and other modalities for real-world applications
-- **AI for Science and Mathematics**: Applying machine learning to support scientific reasoning and mathematical workflows
+- **Trustworthy and Reliable AI**: Developing AI systems whose behavior is accurate, transparent, well-calibrated, and robust across real-world settings
+- **AI Agents and Tools**: Designing intelligent systems that use tools, coordinate complex workflows, and augment human reasoning and decision-making
+- **Multimodal Machine Learning**: Building methods that connect language, vision, and other forms of data to support richer understanding and practical applications
 
 ## 🎓 Education
 
-**Cornell University, College of Engineering**  
+** 🐻 Cornell University, College of Engineering**  
 Aug 2024 - present  
 B.S. in Computer Science, Minor: Mathematics
 
-**United World College of South East Asia, Dover Campus**
-Aug 2021 - May 2024
+** 🌏 United World College of South East Asia, Dover Campus**
 
 ## 🏆 Honors and Awards 
 

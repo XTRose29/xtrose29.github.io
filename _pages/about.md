@@ -20,7 +20,6 @@ Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/raw
 
 ## 🔬 Research Interests
 
-My research focuses on:
 - **Trustworthy and Reliable AI**: Developing AI systems whose behavior is accurate, transparent, well-calibrated, and robust across real-world settings
 - **AI Agents and Tools**: Designing intelligent systems that use tools, coordinate complex workflows, and augment human reasoning and decision-making
 - **Multimodal Machine Learning**: Building methods that connect language, vision, and other forms of data to support richer understanding and practical applications

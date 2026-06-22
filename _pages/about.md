@@ -27,11 +27,11 @@ My research focuses on:
 
 ## 🎓 Education
 
-** 🐻 Cornell University, College of Engineering**  
+** Cornell University, College of Engineering** 🐻  
 Aug 2024 - present  
 B.S. in Computer Science, Minor: Mathematics
 
-** 🌏 United World College of South East Asia, Dover Campus**
+** United World College of South East Asia, Dover Campus** 🌏 
 
 ## 🏆 Honors and Awards 
 

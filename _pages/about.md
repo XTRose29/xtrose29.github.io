@@ -7,8 +7,6 @@ redirect_from:
   - /about.html
 ---
 
-## 👋 About Me
-
 Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell University 🐻 in the College of Engineering, studying Computer Science and Mathematics. 
 
 ## 📚 Research Experience

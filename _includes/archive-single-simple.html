@@ -2,7 +2,8 @@
 
 {% if post.collection == 'teaching' %}
 <p><strong>{{ post.title }}</strong><br />
-{{ post.type }}{% if post.semester %}, {{ post.semester }}{% endif %}</p>
+{{ post.type }}{% if post.semester %}, {{ post.semester }}{% endif %}{% if post.note %}<br />
+{{ post.note }}{% endif %}</p>
 {% elsif post.collection == 'publications' %}
   {% if post.citation %}
     {% assign citation = post.citation | remove: '&quot;' | remove: '<i>' | remove: '</i>' | remove: '&amp;' %}

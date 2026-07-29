@@ -32,9 +32,15 @@ B.S. in Computer Science, Minor: Mathematics
 
 ## 🏆 Honors and Awards 
 
+### Awards, Grants, and Scholarships
+
 - <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Hunter R. Rawlings III Cornell Presidential Research Scholar Award</a>
+- <a href="https://scl.cornell.edu/menschel-internship-opportunities" target="_blank" rel="noopener noreferrer">Menschel Cornell Commitment Public Service Grant</a>
 - <a href="https://news.cornell.edu/stories/2021/11/grant-will-support-female-student-research-computing" target="_blank" rel="noopener noreferrer">Clare Booth Luce (CBL) Undergraduate Research Award</a>
-- <a href="https://bowers.cornell.edu/research/undergraduate-research/bowers-undergraduate-research-experience" target="_blank" rel="noopener noreferrer">Bowers Undergraduate Research Experience (BURE) scholarship program</a> ($7,000 stipend)
+- <a href="https://bowers.cornell.edu/research/undergraduate-research/bowers-undergraduate-research-experience" target="_blank" rel="noopener noreferrer">Bowers Undergraduate Research Experience (BURE) Scholarship</a> 
+
+### Competitions
+
 - Platinum division, Full Score in <a href="https://usaco.org/current/data/jan23_gold_results.html" target="_blank" rel="noopener noreferrer">USA Computing Olympiad (USACO) 2023 January Gold Contest</a>
 - USA Mathematical Olympiad Qualifier (USAMO)
 

@@ -1,13 +1,13 @@
 ---
 title: "The Progress Illusion: Revisiting Meta-Evaluation Standards of LLM Evaluators"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/2025-11-01-progress-illusion-emnlp
 excerpt: 'Published in Findings of EMNLP 2025.'
 date: 2025-11-01
 venue: 'Findings of the Association for Computational Linguistics: EMNLP 2025'
 paperurl: 'https://aclanthology.org/2025.findings-emnlp.1036/'
-posterurl: 
+posterurl: 'https://drive.google.com/file/d/1MeLgzopJXE9-q73YpUKI6NltNinFC7Dq/view?usp=sharing'
 citation: 'Tianruo Rose Xu, Vedant Gaur, Liu Leqi, Tanya Goyal. The Progress Illusion: Revisiting Meta-Evaluation Standards of LLM Evaluators. Findings of the Association for Computational Linguistics: EMNLP 2025, Suzhou, China, November 2025.'
 share: false
 hide_auto_published: true
@@ -21,3 +21,4 @@ LLM judges have gained popularity as an inexpensive and performant substitute fo
 
 Presented at Findings of the Association for Computational Linguistics: EMNLP 2025 (Suzhou, China, November 2025).
 
+[Poster](https://drive.google.com/file/d/1MeLgzopJXE9-q73YpUKI6NltNinFC7Dq/view?usp=sharing)

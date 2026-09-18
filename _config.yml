@@ -29,7 +29,7 @@ author:
   bio              : "Undergraduate Researcher in Computer Science at Cornell University 🎓"
   location         : "Ithaca, NY, USA"
   employer         : "Cornell University"
-  uri              : "https://rosexu.github.io"
+  uri              : "https://xtrose29.github.io"
   email            : "tx88@cornell.edu"
   cv               : "/files/Xu_Tianruo_Rose.pdf" 
 
@@ -85,6 +85,8 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
+  preprints:
+    title: 'Preprints'
   books:
     title: 'Books'
   manuscripts:

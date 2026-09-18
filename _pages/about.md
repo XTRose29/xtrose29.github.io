@@ -13,35 +13,33 @@ Hi~! I am a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/raw
 
 ### Cornell University · NLP Group
 
-Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a> and Professor Claire Cardie.
+Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a> and <a href="https://www.cs.cornell.edu/home/cardie/" target="_blank" rel="noopener noreferrer">Professor Claire Cardie</a>
 
-- **Verbalized uncertainty and factuality in reasoning-based LLMs (2025–2026):** Led project design with Anirudh Atmakuru and Sanjana Ramprasad and built pipelines for reasoning-trace analysis, atomic fact extraction, trace-response alignment, FactScore evaluation, and factuality prediction.
-- **LLM evaluator meta-evaluation (2025):** Developed fine-grained evaluation methods to study evaluator reliability and reference-model sensitivity, with findings published at EMNLP 2025.
-- **Content and style evaluation (2024):** Studied content and style as separate dimensions in natural language generation through experiments, error analysis, and ablations.
+- **Verbalized uncertainty and factuality in reasoning-based LLMs (2025–2026):** 
+- **LLM evaluator meta-evaluation (2025):** 
+- **Content and style evaluation (2024):** 
 
 ### Cornell University · Math + AI Lab
 
 Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
 
-- **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026–present):** Building a DARPA ExPMath-supported platform for comparing formal proof attempts, alongside an autoformalization pipeline, benchmark tasks, and evaluation protocols for formal correctness and semantic fidelity.
+- **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026–present):** 
 
 ### UC San Diego · Q-Lab
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
-- **RT-Safe (2026–present):** Leading a benchmark for embodied agent safety in dynamic environments that continue evolving during model inference, studying how inference latency and reasoning effort affect navigation safety. Manuscript submitted.
-- **DeliveryGym / DeliveryBench (2026):** Developed visual traffic and safety infrastructure, an Unreal Engine first-person-view observation pipeline, and the CityCore Paris map integration with semantic points of interest and navigation graphs.
+- **Real-Time Safety Benchmark (2026–present):** 
+- **DeliveryGym / DeliveryBench (2026):** 
 
 ### Tsinghua University · Pervasive Human-Computer Interaction Lab
 
 Undergraduate Research Assistant in the Department of Computer Science and Technology.
 
-- **AI tool benchmarking and orchestration (2025–present):** Developing tool retrieval, user-intent matching, and personalized tool selection for a platform that supports multi-tool workflows.
-- **NFCMTL (2025):** Contributed dataset preprocessing, baseline training, experiments, and model evaluation for multi-task nailfold capillaroscopy. Runner-up Best Paper at MICCAI 2025 Workshop MSB EMERGE.
+- **AI tool benchmarking and orchestration (2025–present):**
+- **NFCMTL (2025):** 
 
 ### Cornell University · Information Science
-
-Undergraduate Research Assistant (2024), advised by Keigo Kusumegi and Professor Yian Yin. Studied how collaboration patterns affect Wikipedia content quality using data processing and K-means clustering.
 
 ## 🔬 Research Interests
 

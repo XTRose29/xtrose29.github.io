@@ -61,6 +61,7 @@ B.S. in Computer Science, Minor: Mathematics
 
 - <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Hunter R. Rawlings III Cornell Presidential Research Scholar Award</a>
 - <a href="https://scl.cornell.edu/menschel-internship-opportunities" target="_blank" rel="noopener noreferrer">Menschel Cornell Commitment Public Service Grant</a>
+- <a href="https://career.cornell.edu/resources/gso-fund/" target="_blank" rel="noopener noreferrer">Cornell Graduate School Opportunity Fund Grant</a>
 - <a href="https://news.cornell.edu/stories/2021/11/grant-will-support-female-student-research-computing" target="_blank" rel="noopener noreferrer">Clare Boothe Luce Undergraduate Research Award</a>
 - <a href="https://bowers.cornell.edu/research/undergraduate-research/bowers-undergraduate-research-experience" target="_blank" rel="noopener noreferrer">Bowers Undergraduate Research Experience (BURE) stipend and Academic Year Expansion support</a>
 

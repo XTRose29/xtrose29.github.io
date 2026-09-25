@@ -108,50 +108,6 @@
   }
 }
 
-.author__avatar-toggle {
-  display: block;
-  width: 100%;
-  max-width: 175px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-  perspective: 800px;
-
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 4px;
-  }
-
-  &[aria-pressed="true"] .author__avatar-flipper {
-    transform: rotateY(180deg);
-  }
-}
-
-.author__avatar-flipper {
-  display: grid;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-
-  img {
-    display: block;
-    grid-area: 1 / 1;
-    width: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-
-  .author__avatar-back {
-    transform: rotateY(180deg);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
 .author__content {
   display: table-cell;
   vertical-align: top;

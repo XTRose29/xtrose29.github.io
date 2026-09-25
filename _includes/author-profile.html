@@ -8,8 +8,7 @@
 
   <div class="author__avatar">
     {% if author.avatar_back %}
-    <button class="author__avatar-toggle" type="button" aria-label="Flip headshot" aria-pressed="false" title="Click to flip headshot">
-      <span class="author__avatar-flipper">
+    <button class="author__avatar-toggle" type="button" aria-label="Show alternate headshot" aria-pressed="false" title="Click to flip headshot" data-alternate-src="{{ author.avatar_back | prepend: '/images/' | prepend: base_path }}">
     {% endif %}
     {% if author.avatar contains "://" %}
     	<img src="{{ author.avatar }}" alt="{{ author.name }}" />
@@ -17,8 +16,6 @@
     	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" alt="{{ author.name }}" />
     {% endif %}
     {% if author.avatar_back %}
-        <img class="author__avatar-back" src="{{ author.avatar_back | prepend: '/images/' | prepend: base_path }}" alt="" aria-hidden="true" />
-      </span>
     </button>
     {% endif %}
   </div>

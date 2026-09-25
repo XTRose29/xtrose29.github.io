@@ -1,0 +1,28 @@
+.author__avatar .author__avatar-toggle {
+  appearance: none;
+  display: block;
+  width: 100%;
+  max-width: 175px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.author__avatar-toggle img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.author__avatar-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}

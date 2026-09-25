@@ -23,7 +23,8 @@ repository               : "XTRose29/xtrose29.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "headshot_cartoon.png"
+  avatar           : "headshot_main.PNG"
+  avatar_back      : "headshot_bo.PNG"
   name             : "Tianruo Rose Xu"
   pronouns         : # example: "she/her"  
   bio              : "Undergraduate Researcher in Computer Science at Cornell University 🎓"

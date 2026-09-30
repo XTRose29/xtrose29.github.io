@@ -19,24 +19,24 @@ Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target
 - **LLM evaluator meta-evaluation (2025):** 
 - **Content and style evaluation (2024):** 
 
-### Cornell University · Math + AI Lab
-
-Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
-
-- **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026–present):** 
-
 ### UC San Diego · Q-Lab
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
-- **Real-Time Safety Benchmark (2026–present):** 
+- **Real-Time Safety Benchmark (2026):** 
 - **DeliveryGym / DeliveryBench (2026):** 
+
+### Cornell University · Math + AI Lab
+
+Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
+
+- **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026):** 
 
 ### Tsinghua University · Pervasive Human-Computer Interaction Lab
 
 Undergraduate Research Assistant in the Department of Computer Science and Technology.
 
-- **AI tool benchmarking and orchestration (2025–present):**
+- **AI tool benchmarking and orchestration (2025–2026):**
 - **NFCMTL (2025):** 
 
 ### Cornell University · Information Science
@@ -77,8 +77,8 @@ B.S. in Computer Science, Minor: Mathematics
 TikTok E-commerce Knowledge Graph; NLP, computer vision, multimodal learning, and algorithms.
 
 **Independent Research Collaboration · Oracle**<br />
-Aug 2026 - present · Remote<br />
-Mentored by Priyan Pattnayak, Senior Principal Scientist at Oracle Cloud.
+2025 - present · Remote<br />
+Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle Cloud, through the AAAI-26 Undergraduate Consortium.
 
 ## 📄 Publications
 

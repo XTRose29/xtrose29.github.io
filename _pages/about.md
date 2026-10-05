@@ -18,7 +18,7 @@ redirect_from:
     <div class="hero-socials"><a href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer">Book a chat ↗</a><a href="{{ site.author.googlescholar }}">Google Scholar</a><a href="https://github.com/{{ site.author.github }}">GitHub</a><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn</a><a href="https://twitter.com/{{ site.author.twitter }}">X / Twitter</a></div>
   </div>
   <div class="hero-portrait">
-    <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true">✳</span></div>
+    <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true"><img src="{{ '/images/rose.svg' | relative_url }}" alt="" width="72" height="72" /></span></div>
     <p class="portrait-caption">A researcher. A curious mind. <span>Click the photo for another side of me ↗</span></p>
   </div>
 </section>
@@ -84,7 +84,7 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 ## Education
 
 <div class="education-grid">
-  <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
+  <article class="education-stop">{% include context-art.html key="international-school" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
   <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="cornell" %}<p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
 </div>
 
@@ -115,22 +115,14 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 
 ## Industry Experience
 
-<article class="industry-card" markdown="1">
-{% include institution-logo.html key="tiktok" %}
-
-**Incoming Machine Learning Engineer Intern · TikTok**<br />
-2027 · Seattle, WA<br />
-TikTok E-commerce Knowledge Graph; NLP, computer vision, multimodal learning, and algorithms.
-
+<article class="industry-card">
+  {% include institution-logo.html key="tiktok" %}
+  <div class="industry-copy"><h3>Incoming Machine Learning Engineer Intern · TikTok</h3><p class="industry-location">2027 · Seattle, WA</p><p>TikTok E-commerce Knowledge Graph; NLP, computer vision, multimodal learning, and algorithms.</p></div>
 </article>
 
-<article class="industry-card" markdown="1">
-{% include institution-logo.html key="oracle" %}
-
-**Independent Research Collaboration · Oracle**<br />
-2025 - present · Remote<br />
-Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle Cloud, through the AAAI-26 Undergraduate Consortium.
-
+<article class="industry-card">
+  {% include institution-logo.html key="oracle" %}
+  <div class="industry-copy"><h3>Independent Research Collaboration · Oracle</h3><p class="industry-location">2025 - present · Remote</p><p>Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle Cloud, through the AAAI-26 Undergraduate Consortium.</p></div>
 </article>
 
 </section>

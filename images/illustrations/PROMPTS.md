@@ -1,6 +1,6 @@
 # Contextual portfolio artwork
 
-Generated using the built-in imagegen tool. Final website assets are the ten matching `.webp` files in this directory, each 320 × 320 with transparency. Original PNG outputs are retained by the image-generation tool.
+Generated using the built-in imagegen tool. Final website assets are the twelve matching `.webp` files in this directory, each 320 × 320 with transparency. Original PNG outputs are retained by the image-generation tool.
 
 ## Shared style prompt
 
@@ -18,3 +18,10 @@ Use case: stylized-concept. Asset type: small contextual illustration for a pers
 - `education.webp`: A little stack of cream and rose-pink books next to a small sage-blue globe, a rounded maroon graduation cap tilted on top of the books, and one delicate autumn leaf. Communicate an international education and learning.
 - `evaluation.webp`: Two tiny adorable robot judges sitting side by side examining matching cream puzzle pieces, with a rose-pink magnifying glass and a little balanced weighing scale. Communicate checking AI evaluators and comparing similar model capabilities.
 - `multimodal.webp`: A gentle miniature portrait of an older person framed by three small rounded objects: a cream camera, a sage sound-wave token, and a pink speech bubble. Communicate combining vision, audio and language for understanding wellbeing, warm and respectful.
+
+## School and teaching-role revision
+
+Generated with the same miniature clay style, transparent backgrounds, muted rose, cream, lavender, sage, and gold. No labels, captions, logos, watermark, UI layouts, boxes, arrows or flowcharts.
+
+- `international-school.webp`: A small globe surrounded by two tropical palm leaves, an open cream book, a tiny school satchel and a rose-pink pencil. A small friendly global-learning scene representing a school education in Singapore. Distinct silhouette dominated by the open book and palm leaves; no graduation cap or stack of books.
+- `head-ta.webp`: A friendly rose-pink robot tutor with a small gold star badge, standing beside a tiny blackboard displaying only a simple neural network of dots and connecting lines. Two smaller student robots attentively sit in front with notebooks. Communicate leading a machine-learning teaching team, approachable leadership and mentoring. No bird, no laptop, no lettering on the board, no human faces.

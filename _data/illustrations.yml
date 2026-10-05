@@ -28,3 +28,9 @@ evaluation:
 multimodal:
   image: /images/illustrations/multimodal.webp
   alt: A warm portrait surrounded by symbols for images, audio, and language.
+international-school:
+  image: /images/illustrations/international-school.webp
+  alt: A globe and open book surrounded by tropical palm leaves.
+head-ta:
+  image: /images/illustrations/head-ta.webp
+  alt: A robot tutor leading two students through a neural-network lesson.

@@ -15,7 +15,7 @@ redirect_from:
     <p class="hero-statement">Exploring AI we can<br /><em>understand &amp; trust.</em></p>
     <p class="hero-intro">I’m Tianruo Rose Xu, a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell Engineering, studying Computer Science and Mathematics.</p>
     <div class="hero-actions"><a class="rose-button" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-button" href="{{ site.author.cv | relative_url }}">View CV <span aria-hidden="true">↗</span></a></div>
-    <div class="hero-socials"><a href="mailto:{{ site.author.email }}">Email</a><a href="{{ site.author.googlescholar }}">Google Scholar</a><a href="https://github.com/{{ site.author.github }}">GitHub</a><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn</a><a href="https://twitter.com/{{ site.author.twitter }}">X / Twitter</a></div>
+    <div class="hero-socials"><a href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer">Book a chat ↗</a><a href="{{ site.author.googlescholar }}">Google Scholar</a><a href="https://github.com/{{ site.author.github }}">GitHub</a><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn</a><a href="https://twitter.com/{{ site.author.twitter }}">X / Twitter</a></div>
   </div>
   <div class="hero-portrait">
     <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true">✳</span></div>
@@ -30,15 +30,14 @@ redirect_from:
 ## Research
 
 <p class="section-intro">From language models to formal proofs, I’m interested in making intelligent systems more reliable and useful.</p>
-<div class="research-topics" aria-label="Filter research by topic" hidden>
-<button type="button" data-topic="all" aria-pressed="true">All research</button><button type="button" data-topic="trust">Trustworthy AI</button><button type="button" data-topic="multimodal">Multimodal learning</button><button type="button" data-topic="agents">Agents &amp; tools</button><button type="button" data-topic="math">Math &amp; AI</button>
-</div>
-<p class="filter-status" role="status" aria-live="polite"></p>
+{% include research-interests.html %}
 
 ### Research experience
 
-<details class="research-card" data-topics="trust" markdown="1" open>
-<summary><span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+<details class="research-card" markdown="1" open>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+
+<div class="flow-graph" role="group" aria-label="Cornell University · NLP Group research overview"><span class="flow-node">Reasoning traces</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Uncertainty</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Factuality</span></div>
 
 Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a> and <a href="https://www.cs.cornell.edu/home/cardie/" target="_blank" rel="noopener noreferrer">Professor Claire Cardie</a>
 
@@ -48,8 +47,10 @@ Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target
 
 </details>
 
-<details class="research-card" data-topics="trust agents" markdown="1" open>
-<summary><span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+<details class="research-card" markdown="1" open>
+<summary><span class="lab-heading">{% include institution-logo.html key="ucsd" %}<span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+
+<div class="flow-graph" role="group" aria-label="UC San Diego · Q-Lab research overview"><span class="flow-node">Tool interaction</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Embodied agents</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Safety & planning</span></div>
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
@@ -58,8 +59,10 @@ Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" 
 
 </details>
 
-<details class="research-card" data-topics="math" markdown="1" open>
-<summary><span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+<details class="research-card" markdown="1" open>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+
+<div class="flow-graph" role="group" aria-label="Cornell University · Math + AI Lab research overview"><span class="flow-node">LaTeX</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Lean</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Formal proofs</span></div>
 
 Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
 
@@ -67,8 +70,10 @@ Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" targe
 
 </details>
 
-<details class="research-card" data-topics="multimodal agents" markdown="1" open>
-<summary><span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+<details class="research-card" markdown="1" open>
+<summary><span class="lab-heading">{% include institution-logo.html key="tsinghua" %}<span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
+
+<div class="flow-graph" role="group" aria-label="Tsinghua University · Pervasive Human-Computer Interaction Lab research overview"><span class="flow-node">Images & tools</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">AI models</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Evaluation</span></div>
 
 Undergraduate Research Assistant in the Department of Computer Science and Technology.
 
@@ -79,12 +84,6 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 
 <p class="research-affiliation">Additional research affiliation: Cornell University · Information Science</p>
 
-### What connects my work
-
-- **Trustworthy and Reliable AI**: Developing AI systems whose behavior is accurate, transparent, well-calibrated, and robust across real-world settings
-- **Multimodal Machine Learning**: Building methods that connect language, vision, and other forms of data to support richer understanding and practical applications
-- **AI Agents and Tools**: Designing intelligent systems that use tools, coordinate complex workflows, and augment human reasoning and decision-making
-
 </section>
 
 <section class="home-section" id="education" markdown="1">
@@ -92,11 +91,11 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 
 ## Education
 
-🇺🇸 **Cornell University, College of Engineering** 🐻<br />
-Aug 2024 - May 2027 (expected)<br />
-B.S. in Computer Science, Minor: Mathematics
-
-🇸🇬 **United World College of South East Asia, Dover Campus** 🌏
+<div class="education-path" role="group" aria-label="Education path from Singapore to Ithaca">
+  <article class="education-stop">{% include institution-logo.html key="uwcsea" %}<span class="map-dot" aria-hidden="true"></span><p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
+  <div class="education-bridge" aria-hidden="true"><span>↗</span><span>Singapore → Ithaca</span></div>
+  <article class="education-stop">{% include institution-logo.html key="cornell" %}<span class="map-dot" aria-hidden="true"></span><p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
+</div>
 
 </section>
 
@@ -125,13 +124,23 @@ B.S. in Computer Science, Minor: Mathematics
 
 ## Industry Experience
 
+<article class="industry-card" markdown="1">
+{% include institution-logo.html key="tiktok" %}
+
 **Incoming Machine Learning Engineer Intern · TikTok**<br />
 2027 · Seattle, WA<br />
 TikTok E-commerce Knowledge Graph; NLP, computer vision, multimodal learning, and algorithms.
 
+</article>
+
+<article class="industry-card" markdown="1">
+{% include institution-logo.html key="oracle" %}
+
 **Independent Research Collaboration · Oracle**<br />
 2025 - present · Remote<br />
 Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle Cloud, through the AAAI-26 Undergraduate Consortium.
+
+</article>
 
 </section>
 
@@ -142,9 +151,11 @@ Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle C
 
 {% include submitted-manuscripts.html %}
 
+<div class="publication-timeline">
 {% for post in site.publications reversed %}
-  {% include archive-single-simple.html %}
+  {% include portfolio-publication.html %}
 {% endfor %}
+</div>
 
 </section>
 
@@ -153,9 +164,11 @@ Receive mentorship from Priyan Pattnayak, Senior Principal Scientist at Oracle C
 
 ## Teaching
 
-{% for post in site.teaching reversed %}
-  {% include archive-single-simple.html %}
+<div class="teaching-timeline">
+{% for post in site.teaching %}
+  {% include portfolio-teaching.html %}
 {% endfor %}
+</div>
 
 </section>
-<section class="contact-note"><p class="eyebrow">LET’S CONNECT</p><h2>Good research starts<br />with a conversation.</h2><a class="rose-button" href="mailto:{{ site.author.email }}">Say hello <span aria-hidden="true">↗</span></a><span class="contact-location">Ithaca, New York · Cornell University</span></section>
+<section class="contact-note"><p class="eyebrow">LET’S CONNECT</p><h2>Good research starts<br />with a conversation.</h2><a class="rose-button" href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer">Book a chat <span aria-hidden="true">↗</span></a><span class="contact-location">Ithaca, New York · Cornell University</span></section>

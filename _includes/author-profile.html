@@ -34,10 +34,10 @@
         <li class="author__desktop"><i class="fas fa-fw fa-location-dot icon-pad-right" aria-hidden="true"></i>{{ author.location }}</li>
       {% endif %}
       {% if author.employer %}
-        <li class="author__desktop"><i class="fas fa-fw fa-building-columns icon-pad-right" aria-hidden="true"></i>{{ author.employer }}</li>
+        <li class="author__desktop">{% include institution-logo.html key="cornell" %} {{ author.employer }}</li>
       {% endif %}
-      {% if author.email %}
-        <li><a href="mailto:{{ author.email }}"><i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i>{{ site.data.ui-text[site.locale].email_label | default: "Email" }}</a></li>
+      {% if site.chat_booking_url %}
+        <li><a href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer"><i class="fas fa-fw fa-calendar icon-pad-right" aria-hidden="true"></i>Book a chat</a></li>
       {% endif %}
 
       <!-- Font Awesome and Academicons icons / Academic websites -->

@@ -50,6 +50,9 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% if page.visual_steps %}
+          {% include flow-graph.html steps=page.visual_steps label=page.title %}
+        {% endif %}
         {{ content }}
 
         {% if page.citation and page.slidesurl and page.bibtexurl %}

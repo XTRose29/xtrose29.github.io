@@ -12,6 +12,8 @@ share: false
 hide_auto_published: true
 show_paper_link: true
 author_profile: true
+visual_steps: ["Text / audio / video", "Multimodal fusion", "Depression detection"]
+institution: null
 ---
 
 ## Abstract

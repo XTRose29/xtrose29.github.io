@@ -1,0 +1,2 @@
+{% assign institution = site.data.institutions[include.key] %}
+{% if institution %}<span class="institution-logo institution-logo--{{ institution.style }} institution-logo--{{ include.key }}"><img src="{{ institution.image | relative_url }}" alt="{{ institution.name }} logo" width="140" height="48" loading="lazy" /></span>{% endif %}

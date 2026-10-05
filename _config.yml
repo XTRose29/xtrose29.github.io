@@ -18,6 +18,8 @@ url                      : https://xtrose29.github.io # The base hostname & prot
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "XTRose29/xtrose29.github.io"
 
+chat_booking_url: "https://calendar.app.google/kyv5wxxoAkdKQd4c6"
+
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html

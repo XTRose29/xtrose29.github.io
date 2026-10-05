@@ -1,0 +1,24 @@
+cornell:
+  name: Cornell University
+  image: /images/logos/cornell.svg
+  style: seal
+ucsd:
+  name: UC San Diego
+  image: /images/logos/ucsd.png
+  style: wordmark
+tsinghua:
+  name: Tsinghua University
+  image: /images/logos/tsinghua.png
+  style: wordmark
+uwcsea:
+  name: UWCSEA
+  image: /images/logos/uwcsea.svg
+  style: wordmark
+tiktok:
+  name: TikTok
+  image: /images/logos/tiktok.svg
+  style: brand-mark
+oracle:
+  name: Oracle
+  image: /images/logos/oracle.svg
+  style: oracle

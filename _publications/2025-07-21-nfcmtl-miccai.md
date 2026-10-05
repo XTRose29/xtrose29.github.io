@@ -14,6 +14,8 @@ share: false
 hide_auto_published: true
 show_paper_link: true
 author_profile: true
+visual_steps: ["Nailfold images", "Multi-task learning", "Capillary analysis"]
+institution: tsinghua
 ---
 
 ## Abstract

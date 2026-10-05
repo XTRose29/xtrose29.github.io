@@ -15,11 +15,11 @@ redirect_from:
     <p class="hero-statement">Exploring AI we can<br /><em>understand &amp; trust.</em></p>
     <p class="hero-intro">I’m Tianruo Rose Xu, a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell Engineering, studying Computer Science and Mathematics.</p>
     <div class="hero-actions"><a class="rose-button" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-button" href="{{ site.author.cv | relative_url }}">View CV <span aria-hidden="true">↗</span></a></div>
-    <div class="hero-socials"><a href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer">Book a chat ↗</a><a href="{{ site.author.googlescholar }}">Google Scholar</a><a href="https://github.com/{{ site.author.github }}">GitHub</a><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn</a><a href="https://twitter.com/{{ site.author.twitter }}">X / Twitter</a></div>
+    {% include social-links.html %}
   </div>
   <div class="hero-portrait">
     <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true"><img src="{{ '/images/rose.svg' | relative_url }}" alt="" width="72" height="72" /></span></div>
-    <p class="portrait-caption">A researcher. A curious mind. <span>Click the photo for another side of me ↗</span></p>
+    <p class="portrait-caption">Click the photo for another side of me ↗</p>
   </div>
 </section>
 <nav class="section-nav" aria-label="On this page"><a href="#research">Research</a><a href="#education">Education</a><a href="#honors">Honors</a><a href="#industry">Industry</a><a href="#publications">Publications</a><a href="#teaching">Teaching</a></nav>
@@ -29,7 +29,6 @@ redirect_from:
 
 ## Research
 
-<p class="section-intro">From language models to formal proofs, I’m interested in making intelligent systems more reliable and useful.</p>
 {% include research-interests.html %}
 
 ### Research experience
@@ -84,7 +83,7 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 ## Education
 
 <div class="education-grid">
-  <article class="education-stop">{% include context-art.html key="international-school" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
+  <article class="education-stop">{% include context-art.html key="international-school" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3 class="school-name" title="United World College of South East Asia">UWC South East Asia</h3><p>Dover Campus</p></article>
   <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="cornell" %}<p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
 </div>
 

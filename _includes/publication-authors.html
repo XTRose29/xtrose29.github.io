@@ -1,0 +1,1 @@
+{% assign authors = include.paper.citation | split: include.paper.title | first | strip %}{{ authors | escape | replace: 'Tianruo Rose Xu', '<strong>Tianruo Rose Xu</strong>' | replace: 'Tianruo Xu', '<strong>Tianruo Xu</strong>' | replace: 'Xu, T. R.', '<strong>Xu, T. R.</strong>' }}

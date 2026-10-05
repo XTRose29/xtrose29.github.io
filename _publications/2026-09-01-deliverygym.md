@@ -13,7 +13,7 @@ citation: 'Haoqiang Kang, Yiming Zhang, Yiyang Guo, Chuying Li, Jianzhi Shen, Ti
 share: false
 hide_auto_published: true
 show_paper_link: true
-author_profile: true
+author_profile: false
 illustration: delivery
 institution: ucsd
 ---

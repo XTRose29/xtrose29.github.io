@@ -13,7 +13,7 @@ citation: 'Tianruo Rose Xu. Can You Trust What I Think? Analyzing and Improving 
 share: false
 hide_auto_published: true
 show_paper_link: true
-author_profile: true
+author_profile: false
 illustration: language
 institution: cornell
 ---

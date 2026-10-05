@@ -1,0 +1,37 @@
+---
+layout: default
+---
+{% if page.collection == 'teaching' %}{% assign section = 'teaching' %}{% assign section_label = 'Teaching' %}{% assign institution_key = 'cornell' %}{% else %}{% assign section = 'publications' %}{% assign section_label = 'Publications' %}{% assign institution_key = page.institution %}{% endif %}
+<main id="main" class="rose-home rose-detail">
+  <a class="back-link" href="{{ '/' | relative_url }}#{{ section }}">← {{ section_label }}</a>
+  <article class="detail-article" itemscope itemtype="https://schema.org/CreativeWork">
+    <header class="detail-header">
+      <div class="detail-kicker-row">
+        <div class="detail-context">
+          {% if institution_key %}{% include institution-logo.html key=institution_key %}{% endif %}
+          <div><p class="eyebrow">{{ section_label }} / {% if page.semester %}{{ page.semester }}{% else %}{{ page.date | date: '%B %Y' }}{% endif %}</p>
+          {% if page.collection == 'teaching' %}<span class="role-label{% if page.type == 'Head Teaching Assistant' %} role-label--head{% endif %}">{{ page.type }}</span>{% endif %}
+          <p class="detail-venue">{{ page.venue }}{% if page.status == 'preprint' %} · Preprint{% endif %}</p></div>
+        </div>
+        {% if page.illustration %}<div class="detail-art">{% include context-art.html key=page.illustration %}</div>{% endif %}
+      </div>
+      <h1 itemprop="headline">{{ page.title | escape }}</h1>
+      {% if page.collection == 'publications' and page.citation %}<p class="detail-authors">{% include publication-authors.html paper=page %}</p>{% endif %}
+      {% if page.paperurl or page.codeurl or page.posterurl or page.slidesurl or page.bibtexurl or page.link %}<div class="detail-resources">
+        {% if page.paperurl %}<a class="rose-button" href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">Read paper ↗</a>{% endif %}
+        {% if page.codeurl %}<a href="{{ page.codeurl }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i>Code ↗</a>{% endif %}
+        {% if page.posterurl %}<a href="{{ page.posterurl }}" target="_blank" rel="noopener noreferrer">Poster ↗</a>{% endif %}
+        {% if page.slidesurl %}<a href="{{ page.slidesurl }}" target="_blank" rel="noopener noreferrer">Slides ↗</a>{% endif %}
+        {% if page.bibtexurl %}<a href="{{ page.bibtexurl }}" target="_blank" rel="noopener noreferrer">BibTeX ↗</a>{% endif %}
+        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">Course page ↗</a>{% endif %}
+      </div>{% endif %}
+    </header>
+    <div class="detail-content" itemprop="text">{{ content }}</div>
+    {% if page.citation %}<details class="detail-citation"><summary>Cite this work</summary><p>{{ page.citation | escape }}</p></details>{% endif %}
+    {% if page.previous or page.next %}<nav class="detail-pagination" aria-label="Other {{ section_label | downcase }}">
+      {% if page.previous %}<a href="{{ page.previous.url | relative_url }}" title="{{ page.previous.title | escape }}">← Previous {% if section == 'teaching' %}course{% else %}paper{% endif %}</a>{% endif %}
+      {% if page.next %}<a href="{{ page.next.url | relative_url }}" title="{{ page.next.title | escape }}">Next {% if section == 'teaching' %}course{% else %}paper{% endif %} →</a>{% endif %}
+    </nav>{% endif %}
+  </article>
+  <div class="detail-profiles">{% include social-links.html %}</div>
+</main>

@@ -61,7 +61,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .page__footer { margin-top: 0; border-top: 1px solid var(--global-border-color); }
 @media (max-width: 760px) { #main.rose-home { padding: 0 22px; } .home-hero { grid-template-columns: 1fr; gap: 45px; padding: 45px 0; } .hero-portrait { max-width: 300px; width: 80%; margin: 0 auto; } .hero-copy { max-width: 550px; } .section-nav { gap: 22px; } .home-section { padding: 44px 0; } .rose-home h2 { font-size: 30px; } .research-card { padding: 18px; } .masthead__inner-wrap { padding: 14px 18px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
-/* Logos and concept diagrams use local assets and semantic HTML. */
+/* Institution logos and contextual illustrations. */
 .institution-logo { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 140px; width: 140px; height: 52px; vertical-align: middle; }
 .institution-logo img { display: block; max-width: 100%; width: auto; height: auto; max-height: 48px; object-fit: contain; }
 .institution-logo--seal, .institution-logo--brand-mark { flex-basis: 52px; width: 52px; }
@@ -71,23 +71,15 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .author__urls .institution-logo img { max-height: 20px; }
 .interest-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 32px 0 40px; }
 .interest-card { min-width: 0; padding: 20px; background: linear-gradient(145deg, var(--rose-soft), var(--rose-surface)); border: 1px solid var(--global-border-color); border-radius: 12px; }
-.interest-card svg { display: block; width: 100%; height: 90px; margin-bottom: 14px; fill: none; stroke: var(--rose-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .rose-home .interest-card h3 { font: 500 17px/1.4 Georgia, serif; margin: 0 0 10px; }
 .rose-home .interest-card p { font-size: 12px; line-height: 1.7; color: var(--rose-muted); margin: 0; }
-.flow-graph { display: grid; grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr); align-items: center; gap: 8px; margin: 22px 0; }
-.flow-node { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 62px; padding: 12px 10px; border: 1px solid #795365; border-radius: 9px; text-align: center; color: var(--global-text-color); background: var(--rose-soft); font-size: 12px; line-height: 1.5; }
-.flow-node-index { color: var(--rose-accent); font: 10px/1.4 monospace; margin-bottom: 5px; }
-.flow-edge { color: var(--rose-accent); text-align: center; font-size: 20px; }
-.education-path { display: grid; grid-template-columns: 1fr 160px 1fr; align-items: center; gap: 22px; }
+.education-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 .education-stop { position: relative; min-height: 280px; padding: 30px; border: 1px solid var(--global-border-color); border-radius: 12px; background: var(--rose-surface); }
 .education-stop .institution-logo { margin-bottom: 18px; }
 .rose-home .education-stop h3 { font: 23px/1.4 Georgia, serif; margin: 10px 0; }
 .rose-home .education-stop p { font-size: 14px; color: var(--rose-muted); margin-bottom: 10px; }
 .rose-home .education-stop .location-label { color: var(--rose-accent); font-size: 10px; letter-spacing: .13em; }
 .rose-home .education-date { font-size: 12px !important; margin-top: 20px; }
-.education-bridge { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 11px; color: var(--rose-muted); }
-.education-bridge > span:first-child { display: block; width: 100%; color: var(--rose-accent); font-size: 38px; text-align: center; border-bottom: 1px dashed var(--rose-accent); }
-.map-dot { position: absolute; right: 24px; top: 34px; width: 9px; height: 9px; background: var(--rose-accent); border-radius: 50%; box-shadow: 0 0 0 6px var(--rose-soft); }
 .industry-card { padding: 26px; background: var(--rose-surface); border: 1px solid var(--global-border-color); border-radius: 12px; margin-bottom: 16px; }
 .industry-card .institution-logo { margin-bottom: 15px; }
 .industry-card p { font-size: 14px; color: var(--rose-muted); }
@@ -116,6 +108,22 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .role-label { color: var(--rose-accent); font-size: 12px; }
 .rose-home .teaching-card h3 { font: 22px/1.4 Georgia, serif; margin: 16px 0; }
 .rose-home .teaching-card p { font-size: 13px; color: var(--rose-muted); }
-@media (max-width: 950px) { .interest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .education-path { grid-template-columns: 1fr 90px 1fr; gap: 14px; } .education-stop { padding: 22px; } }
-@media (max-width: 620px) { .interest-grid { gap: 10px; } .interest-card { padding: 15px; } .lab-heading { flex-direction: column; align-items: flex-start; gap: 12px; } .education-path { grid-template-columns: 1fr; } .education-bridge { padding: 5px 0 18px; } .education-bridge > span:first-child { width: 70px; border-bottom: 0; transform: rotate(45deg); } .education-stop { min-height: auto; } .publication-timeline { padding-left: 17px; } .publication-card { padding: 18px; } .publication-card::before { left: -24px; } .teaching-card { grid-template-columns: 1fr; gap: 0; border-left: 1px solid var(--global-border-color); padding-left: 18px; } .teaching-date { border-right: 0; padding: 10px 0 14px; } .timeline-dot { left: -23px; top: 16px; } .teaching-body { padding: 18px; } .flow-graph { gap: 4px; grid-template-columns: minmax(0, 1fr) 14px minmax(0, 1fr) 14px minmax(0, 1fr); } .flow-node { font-size: 10px; padding: 10px 5px; min-height: 66px; overflow-wrap: anywhere; } .flow-edge { font-size: 16px; } }
+@media (max-width: 950px) { .interest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .education-grid { gap: 14px; } .education-stop { padding: 22px; } }
+@media (max-width: 620px) { .interest-grid { gap: 10px; } .interest-card { padding: 15px; } .lab-heading { flex-direction: column; align-items: flex-start; gap: 12px; } .education-grid { grid-template-columns: 1fr; } .education-stop { min-height: auto; } .publication-timeline { padding-left: 17px; } .publication-card { padding: 18px; } .publication-card::before { left: -24px; } .teaching-card { grid-template-columns: 1fr; gap: 0; border-left: 1px solid var(--global-border-color); padding-left: 18px; } .teaching-date { border-right: 0; padding: 10px 0 14px; } .timeline-dot { left: -23px; top: 16px; } .teaching-body { padding: 18px; } }
 @media (max-width: 380px) { .interest-grid { grid-template-columns: 1fr; } }
+/* Small editorial illustrations sit alongside the content they describe. */
+.context-art { display: block; flex: 0 0 140px; width: 140px; height: 120px; line-height: 0; }
+.context-art img { display: block; width: 100%; height: 100%; object-fit: contain; border: 0; border-radius: 0; filter: drop-shadow(0 6px 10px #0002); }
+.research-card summary { gap: 18px; }
+.research-card summary .lab-heading { flex: 1; }
+.research-card summary > .context-art { margin-left: auto; }
+.research-card .card-toggle { flex-shrink: 0; }
+.interest-card .context-art { width: 100%; height: 110px; margin-bottom: 15px; }
+.publication-card > .context-art, .teaching-body > .context-art { float: right; margin: -6px -8px 10px 24px; }
+.publication-card::after, .teaching-body::after, .education-stop::after { content: ''; display: block; clear: both; }
+.education-stop > .context-art { float: right; width: 110px; height: 100px; margin: -8px -10px 8px 12px; }
+.context-art--detail { float: right; width: 170px; height: 150px; margin: 0 0 20px 24px; }
+.page__content::after { content: ''; display: block; clear: both; }
+@media (max-width: 760px) { .context-art { width: 110px; height: 100px; flex-basis: 110px; } .research-card .lab-heading { gap: 12px; } }
+@media (max-width: 620px) { .research-card summary .lab-heading { flex-direction: column; align-items: flex-start; gap: 10px; } .research-card summary > .context-art { width: 85px; height: 85px; flex-basis: 85px; } .publication-card > .context-art, .teaching-body > .context-art { width: 95px; height: 90px; margin-left: 12px; } .education-stop > .context-art { width: 100px; height: 90px; } .context-art--detail { width: 120px; height: 110px; margin-left: 16px; } }
+@media (max-width: 620px) { .publication-card h3, .teaching-card h3, .education-stop h3 { clear: both; } .research-card .institution-logo { max-width: 100%; } .education-stop .institution-logo { max-width: calc(100% - 115px); } }

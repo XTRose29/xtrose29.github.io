@@ -35,9 +35,7 @@ redirect_from:
 ### Research experience
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
-
-<div class="flow-graph" role="group" aria-label="Cornell University · NLP Group research overview"><span class="flow-node">Reasoning traces</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Uncertainty</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Factuality</span></div>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span></span>{% include context-art.html key="language" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a> and <a href="https://www.cs.cornell.edu/home/cardie/" target="_blank" rel="noopener noreferrer">Professor Claire Cardie</a>
 
@@ -48,9 +46,7 @@ Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="ucsd" %}<span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
-
-<div class="flow-graph" role="group" aria-label="UC San Diego · Q-Lab research overview"><span class="flow-node">Tool interaction</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Embodied agents</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Safety & planning</span></div>
+<summary><span class="lab-heading">{% include institution-logo.html key="ucsd" %}<span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span></span>{% include context-art.html key="delivery" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
@@ -60,9 +56,7 @@ Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" 
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
-
-<div class="flow-graph" role="group" aria-label="Cornell University · Math + AI Lab research overview"><span class="flow-node">LaTeX</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Lean</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Formal proofs</span></div>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span></span>{% include context-art.html key="math" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
 
@@ -71,9 +65,7 @@ Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" targe
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="tsinghua" %}<span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
-
-<div class="flow-graph" role="group" aria-label="Tsinghua University · Pervasive Human-Computer Interaction Lab research overview"><span class="flow-node">Images & tools</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">AI models</span><span class="flow-edge" aria-hidden="true">→</span><span class="flow-node">Evaluation</span></div>
+<summary><span class="lab-heading">{% include institution-logo.html key="tsinghua" %}<span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span></span>{% include context-art.html key="medical" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Research Assistant in the Department of Computer Science and Technology.
 
@@ -91,10 +83,9 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 
 ## Education
 
-<div class="education-path" role="group" aria-label="Education path from Singapore to Ithaca">
-  <article class="education-stop">{% include institution-logo.html key="uwcsea" %}<span class="map-dot" aria-hidden="true"></span><p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
-  <div class="education-bridge" aria-hidden="true"><span>↗</span><span>Singapore → Ithaca</span></div>
-  <article class="education-stop">{% include institution-logo.html key="cornell" %}<span class="map-dot" aria-hidden="true"></span><p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
+<div class="education-grid">
+  <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3>United World College of South East Asia</h3><p>Dover Campus</p></article>
+  <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="cornell" %}<p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
 </div>
 
 </section>

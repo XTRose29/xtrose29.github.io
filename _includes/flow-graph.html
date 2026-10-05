@@ -1,3 +1,0 @@
-<div class="flow-graph" role="group" aria-label="{{ include.label | default: 'Concept overview' | escape }}">
-  {% for step in include.steps %}<span class="flow-node"><span class="flow-node-index" aria-hidden="true">0{{ forloop.index }}</span>{{ step | escape }}</span>{% unless forloop.last %}<span class="flow-edge" aria-hidden="true">→</span>{% endunless %}{% endfor %}
-</div>

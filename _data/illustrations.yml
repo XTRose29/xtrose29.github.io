@@ -1,0 +1,30 @@
+language:
+  image: /images/illustrations/language.webp
+  alt: A curious robot examining a question about language.
+delivery:
+  image: /images/illustrations/delivery.webp
+  alt: A little courier robot delivering a parcel through a city.
+math:
+  image: /images/illustrations/math.webp
+  alt: A robot fitting together a mathematical proof puzzle.
+medical:
+  image: /images/illustrations/medical.webp
+  alt: A miniature microscope examining capillary loops.
+learning:
+  image: /images/illustrations/learning.webp
+  alt: A songbird beside a laptop displaying a sound spectrogram.
+algorithms:
+  image: /images/illustrations/algorithms.webp
+  alt: A robot using a compass to explore a maze.
+climbing:
+  image: /images/illustrations/climbing.webp
+  alt: A little climber practising on a climbing wall with a safety rope.
+education:
+  image: /images/illustrations/education.webp
+  alt: Books, a globe, and a graduation cap celebrating learning.
+evaluation:
+  image: /images/illustrations/evaluation.webp
+  alt: Two robot judges comparing puzzle pieces beside a balance scale.
+multimodal:
+  image: /images/illustrations/multimodal.webp
+  alt: A warm portrait surrounded by symbols for images, audio, and language.

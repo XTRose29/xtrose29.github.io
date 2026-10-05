@@ -1,7 +1,7 @@
 <article class="publication-card">
+  {% include context-art.html key=post.illustration %}
   <div class="publication-card-meta"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y' }}</time>{% if post.institution %}{% include institution-logo.html key=post.institution %}{% endif %}<span class="venue-label">{{ post.venue | escape }}{% if post.status == 'preprint' %} · Preprint{% endif %}</span></div>
   <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-  {% include flow-graph.html steps=post.visual_steps label=post.title %}
   <div class="paper-citation">{% include archive-single-simple.html %}</div>
   <div class="paper-links">{% if post.paperurl %}<a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Read paper ↗</a>{% endif %}{% if post.codeurl %}<a href="{{ post.codeurl }}" target="_blank" rel="noopener noreferrer">Code ↗</a>{% endif %}{% if post.posterurl %}<a href="{{ post.posterurl }}" target="_blank" rel="noopener noreferrer">Poster ↗</a>{% endif %}</div>
 </article>

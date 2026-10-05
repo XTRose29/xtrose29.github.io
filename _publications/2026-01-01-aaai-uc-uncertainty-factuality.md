@@ -14,7 +14,7 @@ share: false
 hide_auto_published: true
 show_paper_link: true
 author_profile: true
-visual_steps: ["Thinking traces", "Certainty signals", "Factuality"]
+illustration: language
 institution: cornell
 ---
 

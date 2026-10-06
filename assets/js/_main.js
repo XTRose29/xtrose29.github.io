@@ -2,9 +2,19 @@
    Various functions that we want to use within the template
    ========================================================================== */
 
-// This portfolio uses a permanent dark theme, including its Plotly figures.
-let determineComputedTheme = () => "dark";
-let setTheme = () => { $("html").attr("data-theme", "dark"); };
+// Dark is the default; the head script restores the saved choice before paint.
+let determineComputedTheme = () => document.documentElement.dataset.theme === "light" ? "light" : "dark";
+let setTheme = (theme = determineComputedTheme()) => {
+  theme = theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = theme;
+  const toggle = document.getElementById("theme-toggle");
+  const label = theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+  if (toggle) {
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  }
+  try { localStorage.setItem("theme", theme); } catch (error) { /* Switching still works without storage. */ }
+};
 
 /* ==========================================================================
    Plotly integration script so that Markdown codeblocks will be rendered
@@ -50,6 +60,9 @@ $(document).ready(function () {
   const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
 
   setTheme();
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    setTheme(determineComputedTheme() === "dark" ? "light" : "dark");
+  });
 
   // Enable the sticky footer
   var bumpIt = function () {

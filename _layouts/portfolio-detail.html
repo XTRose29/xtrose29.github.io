@@ -13,7 +13,6 @@ layout: default
           {% if page.collection == 'teaching' %}<span class="role-label{% if page.type == 'Head Teaching Assistant' %} role-label--head{% endif %}">{{ page.type }}</span>{% endif %}
           <p class="detail-venue">{{ page.venue }}{% if page.status == 'preprint' %} · Preprint{% endif %}</p></div>
         </div>
-        {% if page.illustration %}<div class="detail-art">{% include context-art.html key=page.illustration %}</div>{% endif %}
       </div>
       <h1 itemprop="headline">{{ page.title | escape }}</h1>
       {% if page.collection == 'publications' and page.citation %}<p class="detail-authors">{% include publication-authors.html paper=page %}</p>{% endif %}

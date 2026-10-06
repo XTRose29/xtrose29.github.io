@@ -12,7 +12,7 @@ redirect_from:
   <div class="hero-copy">
     <p class="eyebrow">CORNELL UNIVERSITY · COMPUTER SCIENCE</p>
     <h1 id="intro-title">Hi, I’m Rose<span class="rose-dot">.</span></h1>
-    <p class="hero-statement">Exploring AI we can<br /><em>understand &amp; trust.</em></p>
+    <p class="hero-statement">Exploring AI we can <br /><em>understand &amp; trust.</em></p>
     <p class="hero-intro">I’m Tianruo Rose Xu, a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell Engineering, studying Computer Science and Mathematics.</p>
     <div class="hero-actions"><a class="rose-button" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-button" href="{{ site.author.cv | relative_url }}">View CV <span aria-hidden="true">↗</span></a></div>
     {% include social-links.html %}
@@ -34,7 +34,7 @@ redirect_from:
 ### Research experience
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span></span>{% include context-art.html key="language" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · NLP Group</strong><span class="card-subtitle">Language, uncertainty & evaluation</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target="_blank" rel="noopener noreferrer">Professor Tanya Goyal</a> and <a href="https://www.cs.cornell.edu/home/cardie/" target="_blank" rel="noopener noreferrer">Professor Claire Cardie</a>
 
@@ -45,7 +45,7 @@ Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="ucsd" %}<span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span></span>{% include context-art.html key="delivery" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
+<summary><span class="lab-heading">{% include institution-logo.html key="ucsd" %}<span><strong>UC San Diego · Q-Lab</strong><span class="card-subtitle">Agent safety & real-world tasks</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
@@ -55,7 +55,7 @@ Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" 
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span></span>{% include context-art.html key="math" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
+<summary><span class="lab-heading">{% include institution-logo.html key="cornell" %}<span><strong>Cornell University · Math + AI Lab</strong><span class="card-subtitle">Formal proofs & autoformalization</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
 
@@ -64,7 +64,7 @@ Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" targe
 </details>
 
 <details class="research-card" markdown="1" open>
-<summary><span class="lab-heading">{% include institution-logo.html key="tsinghua" %}<span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span></span>{% include context-art.html key="medical" %}<span class="card-toggle" aria-hidden="true">+</span></summary>
+<summary><span class="lab-heading">{% include institution-logo.html key="tsinghua" %}<span><strong>Tsinghua University · Pervasive Human-Computer Interaction Lab</strong><span class="card-subtitle">AI tools & human-computer interaction</span></span></span><span class="card-toggle" aria-hidden="true">+</span></summary>
 
 Undergraduate Research Assistant in the Department of Computer Science and Technology.
 
@@ -83,8 +83,8 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 ## Education
 
 <div class="education-grid">
-  <article class="education-stop">{% include context-art.html key="international-school" %}{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3 class="school-name" title="United World College of South East Asia">UWC South East Asia</h3><p>Dover Campus</p></article>
-  <article class="education-stop">{% include context-art.html key="education" %}{% include institution-logo.html key="cornell" %}<p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
+  <article class="education-stop">{% include institution-logo.html key="uwcsea" %}<p class="location-label">SINGAPORE</p><h3 class="school-name" title="United World College of South East Asia">UWC South East Asia</h3><p>Dover Campus</p></article>
+  <article class="education-stop">{% include institution-logo.html key="cornell" %}<p class="location-label">ITHACA, NEW YORK</p><h3>Cornell University</h3><p>College of Engineering<br />B.S. in Computer Science · Mathematics minor</p><p class="education-date">Aug 2024 — May 2027 (expected)</p></article>
 </div>
 
 </section>

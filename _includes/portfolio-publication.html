@@ -1,5 +1,4 @@
 <article class="publication-card">
-  {% include context-art.html key=post.illustration %}
   <div class="publication-card-meta"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y' }}</time>{% if post.institution %}{% include institution-logo.html key=post.institution %}{% endif %}<span class="venue-label">{{ post.venue | escape }}{% if post.status == 'preprint' %} · Preprint{% endif %}</span></div>
   <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
   <div class="paper-citation"><p>{% include publication-authors.html paper=post %}</p></div>

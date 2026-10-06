@@ -1,4 +1,4 @@
 <article class="teaching-card{% if post.type == 'Head Teaching Assistant' %} teaching-card--head{% endif %}">
   <div class="teaching-date"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.semester }}</time><span class="timeline-dot" aria-hidden="true"></span></div>
-  <div class="teaching-body">{% include context-art.html key=post.illustration %}<div class="teaching-card-meta">{% include institution-logo.html key="cornell" %}<span class="role-label{% if post.type == 'Head Teaching Assistant' %} role-label--head{% endif %}">{{ post.type }}</span></div><h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>{% if post.note %}<p>{{ post.note }}</p>{% endif %}</div>
+  <div class="teaching-body"><div class="teaching-card-meta">{% include institution-logo.html key="cornell" %}<span class="role-label{% if post.type == 'Head Teaching Assistant' %} role-label--head{% endif %}">{{ post.type }}</span></div><h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>{% if post.note %}<p>{{ post.note }}</p>{% endif %}</div>
 </article>

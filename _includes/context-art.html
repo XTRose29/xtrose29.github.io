@@ -1,2 +1,0 @@
-{% assign artwork = site.data.illustrations[include.key] %}
-{% if artwork %}<span class="context-art{% if include.detail %} context-art--detail{% endif %}"><img src="{{ artwork.image | relative_url }}" alt="{{ artwork.alt | escape }}" width="320" height="320" loading="lazy" decoding="async" /></span>{% endif %}

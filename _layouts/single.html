@@ -50,9 +50,6 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
-        {% if page.illustration %}
-          {% include context-art.html key=page.illustration detail=true %}
-        {% endif %}
         {{ content }}
 
         {% if page.citation and page.slidesurl and page.bibtexurl %}

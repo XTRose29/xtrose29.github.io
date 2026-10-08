@@ -49,7 +49,7 @@ Undergraduate Researcher, advised by <a href="https://tagoyal.github.io/" target
 
 Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" rel="noopener noreferrer">Professor Lianhui Qin</a>.
 
-- **Real-Time Safety Benchmark (2026)**
+- **[RT-SAFE: Real-Time Embodied Agent Safety Benchmark](https://xtrose29.github.io/RT-SAFE/) (2026)**
 - **DeliveryGym / DeliveryBench (2026)**
 
 </details>

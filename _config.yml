@@ -20,6 +20,10 @@ repository               : "XTRose29/xtrose29.github.io"
 
 chat_booking_url: "https://calendar.app.google/kyv5wxxoAkdKQd4c6"
 
+# Google Analytics 4: paste your web data stream's measurement ID (G-...) here.
+# Leave blank to disable analytics. Tracking runs only on the production site.
+google_analytics_measurement_id: "G-JFTQTH5WVS"
+
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html

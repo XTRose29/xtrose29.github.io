@@ -1,0 +1,11 @@
+.visitors-page { padding: 48px 0 36px; }
+.visitors-heading { text-align: center; margin-bottom: 28px; }
+.visitors-heading h1::after { content: ""; display: block; width: 64px; height: 3px; background: var(--rose-accent); margin: 18px auto; border-radius: 3px; }
+.visitors-heading > p:last-child, .visitors-note { color: var(--rose-muted); }
+.visitors-card { padding: 16px; background: var(--rose-surface); border: 1px solid var(--global-border-color); border-radius: 14px; overflow: hidden; text-align: center; }
+.visitors-status { display: inline-block; margin: 4px 0 20px; padding: 8px 16px; border-radius: 8px; background: var(--rose-soft); color: var(--rose-accent); font-size: 13px; }
+.visitors-world { display: block; width: 100%; height: auto; border-radius: 6px; }
+.visitors-empty { margin: 18px 0 4px !important; color: var(--rose-muted); }
+.visitors-widget img, .visitors-widget iframe { max-width: 100%; }
+.visitors-note { text-align: center; margin-top: 18px !important; font-size: 12px; }
+@media (max-width: 600px) { .visitors-page { padding-top: 30px; } .visitors-card { padding: 10px; } }

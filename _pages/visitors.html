@@ -1,0 +1,27 @@
+---
+permalink: /visitors/
+title: "Visitors"
+layout: home
+author_profile: false
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/visitors.css' | relative_url }}">
+<section class="visitors-page" aria-labelledby="visitors-title">
+  <header class="visitors-heading">
+    <p class="eyebrow">AROUND THE WORLD</p>
+    <h1 id="visitors-title">Visitors</h1>
+    <p>A little window into where readers visit from.</p>
+  </header>
+  <div class="visitors-card">
+    {% capture visitor_widget %}{% include visitor-map.html %}{% endcapture %}
+    {% assign visitor_widget = visitor_widget | strip %}
+    {% if visitor_widget != empty %}
+      <div class="visitors-widget">{{ visitor_widget }}</div>
+    {% else %}
+      <div class="visitors-status">Visitor map · Not connected yet</div>
+      <img class="visitors-world" src="{{ '/images/visitor-world.svg' | relative_url }}" alt="World map. Visitor locations will appear once the live map is connected." width="1080" height="540">
+      <p class="visitors-empty">The live visitor map is coming soon.</p>
+    {% endif %}
+  </div>
+  <p class="visitors-note">Locations are approximate and do not identify individual visitors.</p>
+</section>

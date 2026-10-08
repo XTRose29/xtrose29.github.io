@@ -2,3 +2,8 @@
 <script src="{{ base_path }}/assets/js/headshot.js?v=2" defer></script>
 
 <script src="{{ base_path }}/assets/js/rose.js?v=2" defer></script>
+
+{% if jekyll.environment == "production" and page.permalink != "/visitors/" %}
+<!-- Record site-wide map visits; the interactive map is on /visitors/. -->
+<img src="https://mapmyvisitors.com/map.png?d=mxqCzafcvAvqrtluVRfzqD076NRiKe5PoD7RQX_Z7Rw&amp;cl=ffffff" width="1" height="1" alt="" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;pointer-events:none;">
+{% endif %}

@@ -14,8 +14,7 @@ redirect_from:
     <h1 id="intro-title">Hi, I’m Rose<span class="rose-dot">.</span></h1>
     <p class="hero-statement">Exploring AI we can <br /><em>understand &amp; trust.</em></p>
     <p class="hero-intro">I’m Tianruo Rose Xu, a <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Rawlings Presidential Research Scholar</a> at Cornell Engineering, studying Computer Science and Mathematics.</p>
-    <div class="hero-actions"><a class="rose-button" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-button" href="{{ site.author.cv | relative_url }}">View CV <span aria-hidden="true">↗</span></a></div>
-    {% include social-links.html %}
+    {% include social-links.html show_cv=true %}
   </div>
   <div class="hero-portrait">
     <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true"><img src="{{ '/images/rose.svg' | relative_url }}" alt="" width="72" height="72" /></span></div>

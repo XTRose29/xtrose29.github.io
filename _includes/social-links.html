@@ -1,4 +1,5 @@
 <div class="hero-socials" aria-label="Contact and profiles">
+  {% if include.show_cv %}<a href="{{ site.author.cv | relative_url }}"><i class="fas fa-file-alt" aria-hidden="true"></i>View CV ↗</a>{% endif %}
   <a href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer"><i class="fas fa-calendar" aria-hidden="true"></i>Book a chat ↗</a>
   <a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar" aria-hidden="true"></i>Google Scholar</a>
   <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>

@@ -1,0 +1,402 @@
+{
+  "schema": "polysearch-public-v1",
+  "as_of": "2026-10-10T19:00:21.829761+00:00",
+  "review_status": "Preliminary independent blinded AI judgments; human audit pending. Not final scientific findings.",
+  "counts": {
+    "attempts": 8,
+    "answers": 6,
+    "quota_blocks": 2,
+    "contract_failures": 2,
+    "all_essential_pass": 4
+  },
+  "observations": [
+    {
+      "id": "chatpdf-CG-1",
+      "tool": "chatpdf:web",
+      "task": "CG-1",
+      "date": "2026-10-10T18:55:08.487Z",
+      "operational": "output_received",
+      "status": "passed",
+      "atoms": [
+        {
+          "name": "Strict JSON schema",
+          "score": 1
+        },
+        {
+          "name": "Claim judgment",
+          "score": 1
+        },
+        {
+          "name": "Evidence support",
+          "score": 1
+        },
+        {
+          "name": "Source-consistent explanation",
+          "score": 1
+        },
+        {
+          "name": "Explanation length",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": null,
+        "instruction_format": 1,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "986a7805113fc3d4ff8c0f856090233e71eb62e8219b0f728ebbffea80f1681a",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "chatpdf-CG-2",
+      "tool": "chatpdf:web",
+      "task": "CG-2",
+      "date": "2026-10-10T18:53:45.065Z",
+      "operational": "output_received",
+      "status": "passed",
+      "atoms": [
+        {
+          "name": "Strict JSON schema",
+          "score": 1
+        },
+        {
+          "name": "Literal abstention contract",
+          "score": 1
+        },
+        {
+          "name": "Source coverage",
+          "score": 1
+        },
+        {
+          "name": "Source-consistent explanation",
+          "score": 1
+        },
+        {
+          "name": "Explanation length",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": 1,
+        "instruction_format": 1,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "898545c3e63d714bd7ade09ec13566edbec6537a87f237fc3f39c099fbbeeb3c",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "chatpdf-PU-1",
+      "tool": "chatpdf:web",
+      "task": "PU-1",
+      "date": "2026-10-10T18:57:00.152Z",
+      "operational": "access_blocked",
+      "status": "blocked",
+      "atoms": [
+        {
+          "name": "Dataset identification",
+          "score": null
+        },
+        {
+          "name": "Metric attribution",
+          "score": null
+        },
+        {
+          "name": "Grounding",
+          "score": null
+        },
+        {
+          "name": "Output contract",
+          "score": null
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": null,
+        "grounding_citation_validity": null,
+        "semantic_abstention": null,
+        "instruction_format": null,
+        "outside_source_assertions_present": null
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "d174d89b645c915413cd48f6f335778f07ba4ef6c094b25db29cf4e15d18b573",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "chatpdf-PU-2",
+      "tool": "chatpdf:web",
+      "task": "PU-2",
+      "date": "2026-10-10T18:56:01.219Z",
+      "operational": "access_blocked",
+      "status": "blocked",
+      "atoms": [
+        {
+          "name": "System identification",
+          "score": null
+        },
+        {
+          "name": "Architecture attribution",
+          "score": null
+        },
+        {
+          "name": "Model composition",
+          "score": null
+        },
+        {
+          "name": "Grounding",
+          "score": null
+        },
+        {
+          "name": "Output contract",
+          "score": null
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": null,
+        "grounding_citation_validity": null,
+        "semantic_abstention": null,
+        "instruction_format": null,
+        "outside_source_assertions_present": null
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "0045fd6c7a84e5bf5cedc90696729ce49d8e178891c1acb1962c58d56aafd37b",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "scispace-CG-1",
+      "tool": "scispace:web",
+      "task": "CG-1",
+      "date": "2026-10-10T18:55:13.494Z",
+      "operational": "output_received",
+      "status": "contract",
+      "atoms": [
+        {
+          "name": "Strict JSON schema",
+          "score": 0
+        },
+        {
+          "name": "Claim judgment",
+          "score": 1
+        },
+        {
+          "name": "Evidence support",
+          "score": 1
+        },
+        {
+          "name": "Source-consistent explanation",
+          "score": 1
+        },
+        {
+          "name": "Explanation length",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": null,
+        "instruction_format": 0,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "aafe4d54227c44b4f1d9d38cb59c42af6109d6fcbad0f348bd650b51ac3e8e0c",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "scispace-CG-2",
+      "tool": "scispace:web",
+      "task": "CG-2",
+      "date": "2026-10-10T18:53:50.613Z",
+      "operational": "output_received",
+      "status": "contract",
+      "atoms": [
+        {
+          "name": "Strict JSON schema",
+          "score": 0
+        },
+        {
+          "name": "Literal abstention contract",
+          "score": 0
+        },
+        {
+          "name": "Source coverage",
+          "score": 1
+        },
+        {
+          "name": "Source-consistent explanation",
+          "score": 1
+        },
+        {
+          "name": "Explanation length",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": 1,
+        "instruction_format": 0,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "d3bab48991659c5b49a05943aeb88927ba74fcece52a6bc1a86c5b533ac5ddf4",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "scispace-PU-1",
+      "tool": "scispace:web",
+      "task": "PU-1",
+      "date": "2026-10-10T18:56:53.584Z",
+      "operational": "output_received",
+      "status": "passed",
+      "atoms": [
+        {
+          "name": "Dataset identification",
+          "score": 1
+        },
+        {
+          "name": "Metric attribution",
+          "score": 1
+        },
+        {
+          "name": "Grounding",
+          "score": 1
+        },
+        {
+          "name": "Output contract",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": null,
+        "instruction_format": 1,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "e717fc317f312cfb2c10823a85ef1ac2e00254b4108492d8b4d6da83001db4ae",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    },
+    {
+      "id": "scispace-PU-2",
+      "tool": "scispace:web",
+      "task": "PU-2",
+      "date": "2026-10-10T18:55:56.078Z",
+      "operational": "output_received",
+      "status": "passed",
+      "atoms": [
+        {
+          "name": "System identification",
+          "score": 1
+        },
+        {
+          "name": "Architecture attribution",
+          "score": 1
+        },
+        {
+          "name": "Model composition",
+          "score": 1
+        },
+        {
+          "name": "Grounding",
+          "score": 1
+        },
+        {
+          "name": "Output contract",
+          "score": 1
+        }
+      ],
+      "dimensions": {
+        "factual_correctness": 1,
+        "grounding_citation_validity": 1,
+        "semantic_abstention": null,
+        "instruction_format": 1,
+        "outside_source_assertions_present": false
+      },
+      "latency_ms": null,
+      "timing_note": "Service latency unavailable; manual observation intervals include capture and operator delays.",
+      "effort": "One prompt paste and one submit; total operator effort not fully measured. No retry or repair.",
+      "raw_sha256": "b15242fe9d94d56e9e4dfbc433a2ed3e6acacf70869700a3499020b923ac4d44",
+      "output_excerpt": null,
+      "screenshot": null,
+      "evidence_notice": "Raw text and screenshots retained privately. Public redistribution permission for third-party response/UI content is not established; no substitute image is shown."
+    }
+  ],
+  "replication": {
+    "executed": 0,
+    "planned": 16,
+    "days": [
+      {
+        "date": "2026-10-11",
+        "repetition": "A",
+        "tasks": [
+          "PU-1",
+          "CG-1"
+        ],
+        "state": "not_executed"
+      },
+      {
+        "date": "2026-10-13",
+        "repetition": "A",
+        "tasks": [
+          "CG-2",
+          "PU-2"
+        ],
+        "state": "not_executed"
+      },
+      {
+        "date": "2026-10-15",
+        "repetition": "B",
+        "tasks": [
+          "PU-2",
+          "CG-2"
+        ],
+        "state": "not_executed"
+      },
+      {
+        "date": "2026-10-17",
+        "repetition": "B",
+        "tasks": [
+          "CG-1",
+          "PU-1"
+        ],
+        "state": "not_executed"
+      }
+    ],
+    "time": "16:00 America/New_York",
+    "note": "Verified static evidence snapshot; no live connection and no automatic collection."
+  }
+}

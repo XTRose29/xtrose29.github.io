@@ -1,0 +1,98 @@
+{
+  "schema": "polysearch-provenance-v1",
+  "as_of": "2026-10-10T19:00:21.829761+00:00",
+  "manifest_sha256": "0b950102ce42c286b281034063c2a3ad01c988cf242adc367ba860eb844592ff",
+  "report_sha256": "700ff2f3bcdafb1e8b97fa361787c77b9b1dabcdd1c696e56206211473742ff8",
+  "protocol_sha256": "954a28e084986c47a8bde7d1266fab010f6b434c9f6d6d342ca8db2af7c4b145",
+  "source_hashes": [
+    {
+      "source": "P1",
+      "dataset": "QASPER",
+      "pdf_sha256": "93c3807f124eee17001b5e697f8658167d2fc1ea257f589c2f5f0cd615310b8a"
+    },
+    {
+      "source": "P2",
+      "dataset": "QASPER",
+      "pdf_sha256": "9f59703aa8194f2bea6b02ed966aeb168026fe35e95d0ee1049211b63f087be3"
+    },
+    {
+      "source": "A1",
+      "dataset": "SciFact",
+      "pdf_sha256": "4be57b994f1bfe585d1037b70e8566aa4220846c26458b9f8ddf579f9b4cd3c4"
+    },
+    {
+      "source": "A2",
+      "dataset": "SciFact",
+      "pdf_sha256": "3159ae2f2b8f9d38fc4f54afd3c12d3fd5c0e6462e50058c5fc4f5f65027e43b"
+    }
+  ],
+  "judgment_version": "academic-blind-ai-20261010-v1",
+  "review_status": "Preliminary independent blinded AI judgments; human audit pending. Not final scientific findings.",
+  "export_policy": "Allowlisted measurements only. No prompts, gold answers, grading rationales, source text, account details, private paths, session identifiers, raw transcripts or databases.",
+  "screenshots_included": [],
+  "screenshots_excluded": [
+    {
+      "observation": "chatpdf-CG-1",
+      "captured_during": "2026-10-10",
+      "sha256": "79503235d997da4b189431cdcb7c265cc3ae0a6a503cd55922895dbb8e173a85",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "chatpdf-CG-2",
+      "captured_during": "2026-10-10",
+      "sha256": "dc5e40640f6a8e45c2ba475af48ef17619aefe4c71fef002a21b42252c0d55e8",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "chatpdf-PU-1",
+      "captured_during": "2026-10-10",
+      "sha256": "546239ca2f89fbc6a55e68b89baa0860484046b37d24013ab2ee5b4b5fbe6d09",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "chatpdf-PU-2",
+      "captured_during": "2026-10-10",
+      "sha256": "ca06815273c45980673f88cb0e266c14b60234ebec19f638c9577df31b6db585",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "scispace-CG-1",
+      "captured_during": "2026-10-10",
+      "sha256": "6f33e0066385c32ba19f043b73fb4249ae8abb6bdf984540a93b7a115e1e8447",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "scispace-CG-2",
+      "captured_during": "2026-10-10",
+      "sha256": "6be08fa412d721c87f6361aa16d4b5debdff37e832d137a9cc8fc1f86bf2b3e5",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "scispace-PU-1",
+      "captured_during": "2026-10-10",
+      "sha256": "617d2c054a47a99f817d0c687d0e4e70b5732efeeacc0cac89680aaaf21c2eed",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    },
+    {
+      "observation": "scispace-PU-2",
+      "captured_during": "2026-10-10",
+      "sha256": "9dd8147b08348e3f326bcb67960d831e8038467b27f853606de05a5c861fc099",
+      "decision": "not_published",
+      "reason": "Redistribution permission not established. Original capture retained; exact screenshot time unavailable."
+    }
+  ],
+  "sources_for_figures": {
+    "pilot_matrix": "Eight immutable pilot observations joined to versioned independent judgments",
+    "status_chart": "Operational status of those eight observations",
+    "dimension_chart": "Dimension annotations in the verified pilot report; denominators exclude missing outputs",
+    "replication_timeline": "Frozen schedule joined to read-only observation counts"
+  },
+  "rights_review": "Only study-authored descriptive text, numerical observations and original diagrams published. Tool UI screenshots and response transcripts withheld; benchmark papers/datasets linked rather than redistributed."
+}

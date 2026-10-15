@@ -1,0 +1,29 @@
+<script>
+(function () {
+  var key = 'exclude-own-visits';
+  var choice = new URLSearchParams(window.location.search).get('tracking');
+  var excluded = false;
+  try { excluded = localStorage.getItem(key) === '1'; } catch (error) {}
+  if (choice === 'off' || choice === 'on') {
+    excluded = choice === 'off';
+    try {
+      if (excluded) localStorage.setItem(key, '1');
+      else localStorage.removeItem(key);
+    } catch (error) {}
+  }
+  window.excludeOwnVisits = excluded;
+  if (choice === 'off' || choice === 'on') {
+    document.addEventListener('DOMContentLoaded', function () {
+      var notice = document.createElement('p');
+      notice.setAttribute('role', 'status');
+      notice.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;z-index:10000;padding:16px;background:#17202a;color:white;border-radius:8px;text-align:center';
+      var saved = false;
+      try { saved = (localStorage.getItem(key) === '1') === excluded; } catch (error) {}
+      notice.textContent = excluded
+        ? (saved ? 'Your visits in this browser are excluded from analytics and the visitor map.' : 'Tracking is off for this page. Allow browser storage to save this preference.')
+        : 'Visitor tracking is enabled in this browser.';
+      document.body.appendChild(notice);
+    });
+  }
+}());
+</script>

@@ -5,6 +5,7 @@
 
 {% include seo.html %}
 
+{% include analytics-preferences.html %}
 {% include analytics.html %}
 
 <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">

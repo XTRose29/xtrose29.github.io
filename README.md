@@ -28,3 +28,12 @@ The site will be available at `http://localhost:4000`.
 - Publications: `_publications/`
 - Teaching: `_teaching/`
 - Site config: `_config.yml`
+
+### Exclude your own visits
+
+Open `https://xtrose29.github.io/?tracking=off` once in each browser/profile
+used to visit the site. A confirmation appears when the preference is saved.
+Future visits from that browser skip both Google Analytics and MapMyVisitors,
+including the visitor-map widget. This does not remove past visits. Clearing
+site storage or using a different/private browser profile requires opting out
+again. To resume tracking, open `https://xtrose29.github.io/?tracking=on`.

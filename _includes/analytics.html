@@ -1,13 +1,21 @@
 {% if jekyll.environment == "production" and site.google_analytics_measurement_id != empty and site.google_analytics_measurement_id %}
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id | escape }}"></script>
+<!-- Google Analytics 4: respect this browser's own-visit exclusion. -->
 <script>
+(function () {
+  var measurementId = {{ site.google_analytics_measurement_id | jsonify }};
+  window['ga-disable-' + measurementId] = !!window.excludeOwnVisits;
+  if (window.excludeOwnVisits) return;
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', {{ site.google_analytics_measurement_id | jsonify }}, {
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', measurementId, {
     allow_google_signals: false,
     allow_ad_personalization_signals: false
   });
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+  document.head.appendChild(script);
+}());
 </script>
 {% endif %}

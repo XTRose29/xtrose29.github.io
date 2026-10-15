@@ -18,7 +18,6 @@ redirect_from:
   </div>
   <div class="hero-portrait">
     <div class="portrait-frame"><button class="author__avatar-toggle" type="button" aria-pressed="false" aria-label="Show alternate headshot" data-alternate-src="{{ '/images/headshot_bo.PNG' | relative_url }}"><img src="{{ '/images/headshot_main.PNG' | relative_url }}" alt="Tianruo Rose Xu" width="420" height="420" /></button><span class="portrait-mark" aria-hidden="true"><img src="{{ '/images/rose.svg' | relative_url }}" alt="" width="72" height="72" /></span></div>
-    <p class="portrait-caption">Click the photo for another side of me ↗</p>
   </div>
 </section>
 <nav class="section-nav" aria-label="On this page"><a href="#research">Research</a><a href="#education">Education</a><a href="#honors">Honors</a><a href="#industry">Industry</a><a href="#publications">Publications</a><a href="#teaching">Teaching</a></nav>
@@ -152,4 +151,3 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 </div>
 
 </section>
-<section class="contact-note"><p class="eyebrow">LET’S CONNECT</p><h2>Good research starts<br />with a conversation.</h2><a class="rose-button" href="{{ site.chat_booking_url }}" target="_blank" rel="noopener noreferrer">Book a chat <span aria-hidden="true">↗</span></a><span class="contact-location">Ithaca, New York · Cornell University</span></section>

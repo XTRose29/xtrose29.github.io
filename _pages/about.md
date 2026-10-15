@@ -94,7 +94,7 @@ Undergraduate Research Assistant in the Department of Computer Science and Techn
 
 ### Awards and Research Recognition
 
-- <a href="https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/" target="_blank" rel="noopener noreferrer">CRA Outstanding Undergraduate Researcher Award</a> — **Cornell Computer Science nominee, 2026–2027** (nomination submitted October 2026)
+- <a href="https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/" target="_blank" rel="noopener noreferrer">CRA Outstanding Undergraduate Researcher Award</a> — **Cornell Computer Science nominee, 2026–2027**
 - <a href="https://scl.cornell.edu/get-involved/cornell-commitment/rawlings-cornell-presidential-research-scholars" target="_blank" rel="noopener noreferrer">Hunter R. Rawlings III Cornell Presidential Research Scholar Award</a>
 - <a href="https://scl.cornell.edu/menschel-internship-opportunities" target="_blank" rel="noopener noreferrer">Menschel Cornell Commitment Public Service Grant</a>
 - <a href="https://career.cornell.edu/resources/gso-fund/" target="_blank" rel="noopener noreferrer">Cornell Graduate School Opportunity Fund Grant</a>

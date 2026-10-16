@@ -3,10 +3,6 @@
 <script>
 (function () {
   var container = document.getElementById('visitor-map-container');
-  if (window.excludeOwnVisits) {
-    container.textContent = 'Your visits in this browser are excluded. The live map is paused to avoid recording your visit.';
-    return;
-  }
   var script = document.createElement('script');
   script.id = 'mapmyvisitors';
   script.src = 'https://mapmyvisitors.com/map.js?d=mxqCzafcvAvqrtluVRfzqD076NRiKe5PoD7RQX_Z7Rw&cl=ffffff&w=a';

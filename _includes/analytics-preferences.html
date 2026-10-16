@@ -20,7 +20,7 @@
       var saved = false;
       try { saved = (localStorage.getItem(key) === '1') === excluded; } catch (error) {}
       notice.textContent = excluded
-        ? (saved ? 'Your visits in this browser are excluded from analytics and the visitor map.' : 'Tracking is off for this page. Allow browser storage to save this preference.')
+        ? (saved ? 'Your visits in this browser are excluded from analytics. Opening the Visitors page still loads the map and may count that visit.' : 'Tracking is off for this page. Allow browser storage to save this preference.')
         : 'Visitor tracking is enabled in this browser.';
       document.body.appendChild(notice);
     });

@@ -3,51 +3,57 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A short proposal for a Rasch-based solver leaderboard, separate cost and latency models, and budget-aware adaptive evaluation.">
-  <title>A learning leaderboard · Rose Xu</title>
-  <link rel="icon" href="/images/rose.svg" type="image/svg+xml">
+  <meta name="description" content="A simple proposal for a Rasch-based solver leaderboard: main idea, mathematical details, and an example.">
+  <title>Rasch leaderboard proposal · Rose Xu</title>
   <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#proposal">Skip to proposal</a>
-<div class="page">
-  <header class="topbar"><a href="/">Rose Xu <span aria-hidden="true">↗</span></a><span>RESEARCH NOTES / 01</span></header>
-  <main id="proposal">
-    <header class="hero">
-      <p class="eyebrow"><span class="dot"></span> WORKING PROPOSAL · OCTOBER 2026</p>
-      <h1>A leaderboard<br>that learns.</h1>
-      <p class="intro">Estimate solver ability and problem difficulty together. Then choose evaluations that balance useful proofs, low cost, and better predictions.</p>
-      <div class="meta"><span>Tianruo Rose Xu</span><span>Rasch model + adaptive sampling</span><span>Draft for discussion</span></div>
-    </header>
-    <section class="idea" aria-labelledby="idea-title">
-      <div><p class="eyebrow">THE CENTRAL IDEA</p><h2 id="idea-title">The gap matters.</h2><p>A stronger solver on a harder problem can have the same success probability as a weaker solver on an easier problem.</p><p class="equation">P(solve) = 1 / (1 + exp(−(ability − difficulty)))</p><p class="fine">Rasch / one-parameter logistic model. The controls below illustrate the equation; they are not measured results. <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Model reference ↗</a></p></div>
-      <div class="demo">
-        <div class="demo-heading"><span>ILLUSTRATIVE PREDICTION</span><output id="probability" aria-live="polite">73%</output></div>
-        <div class="meter" aria-hidden="true"><div id="probability-bar"></div></div>
-        <label for="ability">Solver ability <output id="ability-value" for="ability">1.0</output></label>
-        <input id="ability" type="range" min="-3" max="3" step="0.1" value="1">
-        <label for="difficulty">Node difficulty <output id="difficulty-value" for="difficulty">0.0</output></label>
-        <input id="difficulty" type="range" min="-3" max="3" step="0.1" value="0">
-        <p class="fine">Increase both by the same amount: the prediction stays the same.</p>
-        <noscript><p>Enable JavaScript to adjust the example. Ability 1 and difficulty 0 imply about 73% success.</p></noscript>
-      </div>
-    </section>
-    <div class="proposal-body">
-      <section class="step"><span class="number">01</span><div><h2>Learn two sets of scores</h2><p>Give each solver an ability parameter and each proof node a difficulty parameter. Fit a regularized Rasch model to verified success/failure outcomes, updating after each batch. Start with neutral priors, or use initial difficulty estimates as weak priors.</p><p>Fix mean node difficulty at zero to anchor the scale. Use Gaussian priors to keep sparse or all-success/all-failure estimates finite. Show uncertainty alongside ratings; an Elo-style number can be a display scale, not a separate model.</p></div></section>
-      <section class="step"><span class="number">02</span><div><h2>Keep speed and cost separate</h2><p>Reuse estimated node difficulty as a candidate predictor for two secondary models: runtime and dollars per attempt. Each solver gets separate time and cost parameters; its proof ability does not determine its efficiency.</p><p>Fit to all attempts, including failures. Test whether shared difficulty improves held-out predictions over solver-only baselines. It is a hypothesis to validate, not an assumption to enforce.</p></div></section>
-      <section class="step"><span class="number">03</span><div><h2>Start small, with shared anchors</h2><p>A proposed pilot: <strong>3 solvers × 12 nodes × 2 repeats = 72 attempts</strong>, subject to an agreed dollar cap. Include easy, medium, and hard nodes, and give every solver the same initial nodes so their scores are comparable.</p><p>Pin solver versions, Lean checks, context, and attempt limits. Use fresh runs; record outcome, actual cost, time, and selection probability. Budget exhaustion counts as failure to solve within the limit; infrastructure errors are tracked separately.</p></div></section>
-      <section class="step"><span class="number">04</span><div><h2>Mix progress with learning</h2><p>After the pilot, use this simple starting allocation of attempt slots. These percentages are tunable choices, not claimed optimal settings.</p>
-        <div class="allocation" aria-label="60 percent solve efficiently, 30 percent learn, 10 percent explore"><span class="solve">60%</span><span class="learn">30%</span><span class="explore">10%</span></div>
-        <dl class="policy"><div><dt>60% · Solve efficiently</dt><dd>On unsolved nodes, favor high predicted success per expected dollar, within a latency limit.</dd></div><div><dt>30% · Reduce uncertainty</dt><dd>Favor uncertain solver–node gaps with success probabilities near 50%, adjusted for expected cost. Use p(1−p) × Var(ability − difficulty) / cost as an initial heuristic.</dd></div><div><dt>10% · Explore broadly</dt><dd>Randomize across eligible pairs to preserve coverage, revisit uncertain rankings, and connect new solvers or nodes to the anchor set.</dd></div></dl>
-        <p>Enforce a hard total budget across all three groups. Keep a separate, uniformly sampled evaluation set for calibration; adaptively selected raw success rates alone are not a fair ranking.</p>
-      </div></section>
-      <section class="step"><span class="number">05</span><div><h2>Know when to pause—or add harder nodes</h2><p>Track two signals separately: <strong>estimate stability</strong> (uncertainty and pairwise rankings change little) and <strong>benchmark saturation</strong> (strong solvers solve almost everything).</p><p>As a pilot rule, flag saturation when a leading solver exceeds 95% closure on the fixed evaluation set, with enough repeats and an uncertainty interval. A high point estimate alone is insufficient. Keep anchor nodes when adding harder ones, version the pool, and refit; do not compare unanchored scores across pools.</p></div></section>
-      <section class="step"><span class="number">06</span><div><h2>Evaluate the evaluation strategy</h2><p>Compare the mixed policy with uniform sampling under the same dollar budget. Measure verified nodes solved, held-out probability calibration, ranking uncertainty, total spend, and elapsed time. Report solver pairs by the posterior probability that one ability exceeds the other.</p><p>First test the loop on simulated outcomes, then run the small real pilot. Adjust the sampling mixture based on those results.</p></div></section>
-    </div>
-    <aside class="discussion"><p class="eyebrow">QUESTIONS FOR DISCUSSION</p><h2>What should the next dollar buy?</h2><p>Should the first pilot prioritize more solved nodes or more reliable ability estimates? Is the 60/30/10 split a reasonable baseline? Does one shared difficulty axis explain enough of the variation in cost and runtime?</p></aside>
-    <footer><p><strong>Status:</strong> Proposed design; no experimental results are claimed here.</p><p>Background: <a href="https://en.wikipedia.org/wiki/Rasch_model_estimation">Rasch model estimation</a> · <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan: item-response models</a></p><a href="/">← Back to Rose’s homepage</a></footer>
-  </main>
-</div>
+<main>
+  <section aria-labelledby="idea">
+    <h1 id="idea">Main idea</h1>
+    <p>Learn a score for each solver’s ability and each node’s difficulty. Predict whether a solver can solve a node from the difference between those scores. Update the estimates as verified results arrive.</p>
+    <p>Estimate cost and runtime separately, with their own solver parameters. Test whether node difficulty helps predict them too.</p>
+    <p>Start with shared nodes evaluated by every solver. Then balance three goals: solve problems cheaply, improve uncertain estimates, and explore less-tested pairs. A tentative allocation is <strong>60% efficient solving, 30% learning, and 10% random exploration</strong>, within an agreed budget.</p>
+  </section>
+
+  <section aria-labelledby="math">
+    <h2 id="math">Detailed math</h2>
+    <h3>1. Success probability</h3>
+    <p>Let <var>s<sub>i</sub></var> be solver <var>i</var>’s ability, <var>d<sub>j</sub></var> node <var>j</var>’s difficulty, and <var>y</var> the observed outcome: 1 for a verified proof, 0 for failure within the attempt budget.</p>
+    <div class="equation">p<sub>ij</sub> = P(y = 1) = σ(s<sub>i</sub> − d<sub>j</sub>)<br>σ(x) = 1 / (1 + exp(−x))</div>
+    <p>Only the gap matters. Adding 1 to both scores leaves the prediction unchanged. Fix the mean node difficulty at zero to anchor the scale.</p>
+
+    <h3>2. Estimate the scores</h3>
+    <p>After each batch, fit the observed outcomes by minimizing the regularized negative log-likelihood:</p>
+    <div class="equation">L = −Σ<sub>observed attempts</sub> [y log p<sub>ij</sub> + (1 − y) log(1 − p<sub>ij</sub>)]<br>　 + λ<sub>s</sub> Σ<sub>i</sub> s<sub>i</sub>² + λ<sub>d</sub> Σ<sub>j</sub> (d<sub>j</sub> − μ<sub>j</sub>)²</div>
+    <p>Positive λ values prevent extreme estimates when data are sparse. Use μ<sub>j</sub> = 0 initially, or a centered initial difficulty estimate. This is a Gaussian-prior MAP fit. Estimate uncertainty as well; the fitted scores alone do not tell us how reliable a ranking is.</p>
+
+    <h3>3. Cost, time, and the next evaluation</h3>
+    <p>A simple starting model for expected dollars and seconds per attempt is:</p>
+    <div class="equation">Ĉ<sub>ij</sub> = exp(c<sub>i</sub> + β<sub>C</sub>d<sub>j</sub>)<br>T̂<sub>ij</sub> = exp(t<sub>i</sub> + β<sub>T</sub>d<sub>j</sub>)</div>
+    <p>Here c<sub>i</sub> and t<sub>i</sub> are separate solver parameters; the β coefficients describe how difficulty relates to each objective. Fit using successful and failed attempts. Compare against solver-only baselines to check whether sharing difficulty is useful.</p>
+    <div class="equation">Efficient-solving priority = p<sub>ij</sub> / max(Ĉ<sub>ij</sub>, ε)<br>Learning priority = p<sub>ij</sub>(1 − p<sub>ij</sub>) Var(s<sub>i</sub> − d<sub>j</sub>) / max(Ĉ<sub>ij</sub>, ε)</div>
+    <p>The learning score is a heuristic: favor uncertain ability–difficulty gaps near 50% success, adjusted for cost. ε is a small positive cost floor. Apply a latency limit and a total spending cap; random exploration maintains coverage.</p>
+  </section>
+
+  <section aria-labelledby="example">
+    <h2 id="example">Simple example</h2>
+    <p>Suppose solver A has ability 1.5 and solver B has ability 0.5. An easy node has difficulty −0.5; a hard node has difficulty 0.5. These are illustrative numbers, not experimental results.</p>
+    <div class="table-wrap"><table>
+      <caption>Predicted probability of solving a node</caption>
+      <thead><tr><th>Solver</th><th>Easy node</th><th>Hard node</th></tr></thead>
+      <tbody><tr><th>A · ability 1.5</th><td>88%</td><td>73%</td></tr><tr><th>B · ability 0.5</th><td>73%</td><td>50%</td></tr></tbody>
+    </table></div>
+    <p><strong>A on the hard node and B on the easy node both have a gap of 1, so both have about 73% success.</strong></p>
+    <p>Now suppose an attempt costs $2 for A and $0.50 for B. On the hard node, A gives 0.73 / 2 ≈ 0.37 expected successes per dollar, while B gives 0.50 / 0.50 = 1.00. A is more likely to solve it in one attempt; B has better predicted success per dollar.</p>
+    <p>If B’s ability on hard nodes is uncertain, testing B may also be valuable for learning. If B solves the node, the model has evidence to raise B’s ability, lower the node’s difficulty, or both; results from other solvers and nodes help distinguish those explanations.</p>
+    <p>For a first pilot, compare this sampling policy with uniform sampling under the same budget. Use a fixed evaluation set to check prediction accuracy and ranking uncertainty. Treat stable estimates and a nearly solved benchmark as separate signals; keep shared anchor nodes when adding harder problems.</p>
+  </section>
+  <footer>
+    <p>Draft proposal · Rose Xu · October 2026</p>
+    <p>References: <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan: Rasch / item-response models</a> · <a href="https://en.wikipedia.org/wiki/Rasch_model_estimation">Rasch model estimation</a></p>
+    <a href="/">Back to homepage</a>
+  </footer>
+</main>
 </body>
 </html>

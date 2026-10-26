@@ -121,20 +121,29 @@
       I<sub>ij</sub><sup>(t)</sup> ≈ ½ log(1 + p<sub>ij</sub><sup>(t)</sup>(1 − p<sub>ij</sub><sup>(t)</sup>) V<sub>ij</sub><sup>(t)</sup>)
     </div>
     <p>Bernoulli Fisher information for the gap is largest at p = 0.5. The uncertainty term favors pairs whose parameters are still poorly measured. I is a local Gaussian/curvature information proxy about the joint parameters, not exact expected information gain or a direct guarantee of improved ranking accuracy. If the goal is specifically ranking solvers, information about strength contrasts may be a better future target.</p>
-    <h3 id="variance">What the variance approximation means</h3>
-    <p>H<sub>sᵢ</sub> and H<sub>dⱼ</sub> are scalar diagonal entries of the Hessian of the <em>regularized success loss</em>. They measure curvature with respect to solver strength and node difficulty. The prototype uses:</p>
+    <h3 id="variance">How the H values are calculated</h3>
+    <p>H<sub>sᵢ</sub> and H<sub>dⱼ</sub> measure curvature of the regularized Bernoulli negative log-likelihood with respect to solver strength and node difficulty. At a batch fit, they are diagonal entries of its Hessian:</p>
+    <div class="equation">
+      H<sub>sᵢ</sub> = ∂²L<sub>reg</sub>/∂s<sub>i</sub>² = λ + Σ<sub>n : iₙ = i</sub> p<sub>n</sub>(1 − p<sub>n</sub>)<br>
+      H<sub>dⱼ</sub> = ∂²L<sub>reg</sub>/∂d<sub>j</sub>² = λ + Σ<sub>n : jₙ = j</sub> p<sub>n</sub>(1 − p<sub>n</sub>)
+    </div>
+    <p>Here n indexes eligible graded invocation events, p<sub>n</sub> = σ(s<sub>iₙ</sub> − d<sub>jₙ</sub>), and λ is the precision of the independent zero-centered Gaussian priors (currently <strong>λ = 1</strong>). The first sum includes every eligible attempt by solver i; the second includes every eligible attempt on node j. Repeated invocations count as separate observations, not separate internal retries. At fixed parameters, each event contributes p<sub>n</sub>(1 − p<sub>n</sub>), irrespective of whether it succeeded; the outcomes affect the fitted probabilities.</p>
+    <p><strong>Online calculation:</strong> initialize each stored H to λ. For a new eligible event on (i, j), calculate p from the scores <em>before</em> their update, then accumulate:</p>
+    <div class="equation">
+      p = σ(s<sub>i</sub><sup>(t)</sup> − d<sub>j</sub><sup>(t)</sup>)<br>
+      H<sub>sᵢ</sub> ← H<sub>sᵢ</sub> + p(1 − p)<br>
+      H<sub>dⱼ</sub> ← H<sub>dⱼ</sub> + p(1 − p)
+    </div>
+    <p>Other H values stay unchanged. This is a running curvature approximation: old contributions retain the predictions used when they arrived. <strong>A full refit recomputes and replaces the H values</strong> using all eligible events and the newly fitted scores; it does not add the same history a second time.</p>
+    <p><strong>Simple example:</strong> starting from λ = 1, four eligible attempts involving a solver, each with p = 0.5, give H<sub>sᵢ</sub> = 1 + 4 × 0.25 = 2. Its reciprocal is 0.5, compared with the initial value 1. More accumulated curvature means a smaller uncertainty proxy.</p>
+    <p>The sampler uses the stored H values to approximate uncertainty in the score difference:</p>
     <div class="equation">
       Ṽ<sub>ij</sub> = 1/H<sub>sᵢ</sub> + 1/H<sub>dⱼ</sub>
     </div>
     <p><strong>This is a diagonal-curvature heuristic, not a calibrated variance estimate.</strong> It replaces the joint precision matrix by its diagonal before inversion. In general, 1/H<sub>sᵢ</sub> is not the marginal variance of s<sub>i</sub>: taking reciprocals of Hessian diagonal entries is different from taking diagonal entries of the inverse Hessian.</p>
     <details>
-      <summary>Curvature, full covariance, and limitations</summary>
-      <p>Let ψ contain all solver strengths and node difficulties. At a converged batch fit ψ̂, define H = ∇²[L<sub>success</sub> + (λ/2)‖ψ‖²]. With independent Gaussian priors of precision λ = 1, the relevant diagonal entries are:</p>
-      <div class="equation">
-        H<sub>sᵢ</sub> = H<sub>sᵢ,sᵢ</sub> = λ + Σ<sub>n : iₙ = i</sub> p<sub>n</sub>(1 − p<sub>n</sub>)<br>
-        H<sub>dⱼ</sub> = H<sub>dⱼ,dⱼ</sub> = λ + Σ<sub>n : jₙ = j</sub> p<sub>n</sub>(1 − p<sub>n</sub>)
-      </div>
-      <p>The sums include graded invocation events; batch probabilities are evaluated at the fitted parameters. Each event also contributes −p<sub>n</sub>(1 − p<sub>n</sub>) to its strength–difficulty off-diagonal entries. Those couplings matter because an outcome informs both the solver and the node.</p>
+      <summary>Full covariance and limitations</summary>
+      <p>Let ψ contain all solver strengths and node difficulties. At a converged batch fit ψ̂, define H = ∇²L<sub>reg</sub>, where L<sub>reg</sub> = L<sub>success</sub> + (λ/2)‖ψ‖². Each event contributes −p<sub>n</sub>(1 − p<sub>n</sub>) to its strength–difficulty off-diagonal entries. Those couplings matter because an outcome informs both the solver and the node.</p>
       <p>A full <a href="https://mc-stan.org/docs/reference-manual/laplace.html">Laplace approximation</a> uses the inverse of the entire Hessian of the negative log posterior:</p>
       <div class="equation">
         Σ ≈ H<sup>−1</sup><br>

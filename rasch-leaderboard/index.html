@@ -3,24 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Toward an evolving Rasch benchmark: solver scores, online updates, adaptive sampling, dynamic node banks and comparable scores across versions.">
-  <title>Rasch benchmark: model and implementation · Rose Xu</title>
+  <meta name="description" content="A co-evolving benchmark for Lean proof solvers: Rasch mathematics, online calibration, cost-aware sampling, dynamic node banks and cross-version score linking.">
+  <title>A co-evolving Rasch benchmark · Rose Xu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <section aria-labelledby="idea">
     <h1 id="idea">Main idea</h1>
-    <p>Build a benchmark that learns <strong>which solvers are strong, which nodes are difficult, and what an attempt is likely to cost</strong>. Use those estimates to choose the next solver, balancing information gain, closing nodes, and spending.</p>
+    <p>Build a <strong>co-evolving benchmark for Lean proof solvers</strong>: solver improvements expose new limits of the problem bank, and the benchmark responds with informative, validated problems that guide further improvements. A shared measurement model tracks <strong>solver strength, node difficulty, expected cost and speed</strong> throughout this feedback loop.</p>
     <p>A node is a proof obligation, such as a lemma or theorem. A solver is a model together with its strategy and implementation. Compare results within a recorded protocol: fixed inputs, environment, retry limits, tools and budgets. Start with overlapping nodes so the solvers can be compared on a common scale.</p>
-    <p>The loop is: <strong>choose a solver → run it → verify the result → record outcome, cost and time → update scores → choose again.</strong> Raw success rates remain useful, but can be misleading when different solvers receive different difficulties.</p>
-    <p>We are building toward an <strong>evolving benchmark</strong>: eventually, the node bank should also change as new problems arrive and existing ones become saturated. Today’s prototype provides online calibration and adaptive sampling recommendations; dynamic node-bank management and cross-version score linking are the next steps.</p>
+    <p><strong>Within a release:</strong> choose a solver → attempt a node → verify with Lean → record outcome, cost and time → update estimates → choose again.</p>
+    <p><strong>Across releases:</strong> analyze failures and coverage → improve or add versioned solvers → propose and validate new nodes → calibrate them against shared anchors → refresh the active bank → evaluate again. New nodes may be harder, cover missing mathematics, or reveal a different weakness.</p>
+    <p>Here, <em>co-evolution</em> describes the proposed feedback between solver development and benchmark development. Updating a strength estimate measures a solver; it does not improve the solver itself. The prototype does not train or rewrite agents. Human-led solver improvements can participate in the same versioned loop.</p>
     <p class="note"><strong>Current status:</strong> a local backend prototype implements fitting, online updates and sampling recommendations. It has not replaced production routing or the public leaderboard. The numerical example below is illustrative, not an experimental result.</p>
-    <nav aria-label="On this page"><a href="#math">Scoring model</a> · <a href="#sampling">Sampling</a> · <a href="#implementation">Implementation</a> · <a href="#evolving">Evolving benchmark</a> · <a href="#example">Example</a> · <a href="#papers">Papers</a></nav>
+    <nav aria-label="On this page"><a href="#math">Detailed math</a> · <a href="#sampling">Sampling</a> · <a href="#example">Simple example</a> · <a href="#evolving">Co-evolution &amp; comparability</a> · <a href="#implementation">Implementation</a> · <a href="#papers">Papers</a></nav>
   </section>
 
   <section aria-labelledby="math">
     <h2 id="math">Detailed math</h2>
+    <p>Record an event (i, j, y, C, T): a versioned solver, an immutable node/context, a verified outcome, dollars spent and elapsed seconds. The outcome y is 1 for a valid proof and 0 for a graded unsuccessful invocation under the declared budget. An ungradeable run has no success label. Repeated invocations supply repeated observations; internal retries share one final invocation grade.</p>
     <h3>Task 1 · Strength, cost, speed and node difficulty</h3>
     <p>Solver <var>i</var> has strength <var>s<sub>i</sub></var>, cost score <var>c<sub>i</sub></var>, and speed score <var>v<sub>i</sub></var>. Node <var>j</var> has a latent vector <var>(d<sub>j</sub>, a<sub>j</sub>, b<sub>j</sub>)</var>: proof difficulty, cost effect and time effect. Only the solver scores are intended for reporting.</p>
     <div class="equation">
@@ -29,7 +31,9 @@
       E[cost | i, j] = $0.10 × exp(c<sub>i</sub> + a<sub>j</sub>)<br>
       E[time | i, j] = 30 seconds × exp(−v<sub>i</sub> + b<sub>j</sub>)
     </div>
+    <p>The gap s<sub>i</sub> − d<sub>j</sub> is the log-odds of success. A zero gap gives 50%; a gap of 1 gives 73.1%. Raising both strength and difficulty by the same amount leaves the prediction unchanged. This formalizes “stronger solver on a harder node ≈ weaker solver on an easier node.” Difficulty is estimated relative to the solver population and evaluation protocol.</p>
     <p>Higher strength and speed are better; lower cost is better. Separate node effects allow a problem to be expensive without assuming it is equally difficult or slow. The $0.10 and 30-second scales define the current zero-score starting estimates; they are tunable priors, not measured averages.</p>
+    <p>These cost and time expectations include failures. Under this additive model, the same-node cost ratio for A versus B is exp(c<sub>A</sub> − c<sub>B</sub>), and the duration ratio is exp(v<sub>B</sub> − v<sub>A</sub>). These invariances are assumptions to validate, just like the success model.</p>
     <p>The success model has the requested <strong>problem-independent odds multiplier</strong>:</p>
     <div class="equation">
       odds<sub>ij</sub> = p<sub>ij</sub> / (1 − p<sub>ij</sub>) = exp(s<sub>i</sub> − d<sub>j</sub>)<br>
@@ -39,6 +43,11 @@
 
     <h3>Full recalibration</h3>
     <p>Fit all eligible observations to date within a dataset/protocol scope. Success uses Bernoulli negative log likelihood. Cost and time use a quasi-Poisson loss to estimate <em>expected arithmetic cost and duration</em>, using both successful and unsuccessful attempts. This does not assume dollars or seconds are Poisson counts.</p>
+    <div class="equation">
+      L<sub>success</sub> = −Σ<sub>events</sub> [y log p<sub>ij</sub> + (1 − y) log(1 − p<sub>ij</sub>)]<br>
+      fitted scores = argmin [L<sub>success</sub> + L<sub>cost</sub> + L<sub>time</sub> + prior penalty]
+    </div>
+    <p>A fit rewards predictions that assign high probability to the observed outcomes. Overlapping trials distinguish a strong solver from an easy workload. The conditional likelihood treats invocation outcomes as independent given the parameters; correlated repeats, shared context and solver specialization require validation. A finite prior-regularized score does not establish a well-measured ranking.</p>
     <details>
       <summary>Objective and optimization</summary>
       <div class="equation">
@@ -52,6 +61,11 @@
 
     <h3>Online updates</h3>
     <p>After each eligible invocation, update the relevant solver and node coordinates. The success likelihood contributes <var>p − y</var> to the strength gradient and <var>y − p</var> to the difficulty gradient. Unexpected success raises strength and lowers difficulty; other observations help distinguish the two explanations.</p>
+    <div class="equation">
+      s<sub>i</sub> ← s<sub>i</sub> + α(y − p<sub>ij</sub>)<br>
+      d<sub>j</sub> ← d<sub>j</sub> − α(y − p<sub>ij</sub>)
+    </div>
+    <p>These are the likelihood-only updates with learning rate α and a shared pre-update prediction. The actual prototype also applies prior shrinkage and clipping, as shown below.</p>
     <details>
       <summary>Exact update used in the prototype</summary>
       <div class="equation">
@@ -60,13 +74,18 @@
         θ ← clip(θ − clip(0.1 × g<sub>θ</sub>, −0.25, 0.25), −20, 20)
       </div>
       <p>Counts n include the new observation for that coordinate. For cost and time, use the residual exp(η) − measurement/unit, with the signs from their predictors and the same count-scaled prior shrinkage. Missing measurements leave that dimension untouched. Both sides use the pre-update prediction.</p>
-      <p>This is an order-dependent, regularized stochastic-gradient approximation. Periodic full recalibration provides a consistent reference fit; a scheduling service for those recalibrations has not yet been added.</p>
+      <p>This is an order-dependent, regularized stochastic-gradient approximation. Periodic full recalibration reconciles the accumulated observations using the batch objective; a scheduling service for those recalibrations has not yet been added.</p>
     </details>
   </section>
 
   <section aria-labelledby="sampling">
     <h2 id="sampling">Task 2 · Choose the next solver</h2>
     <p>For an open node, score the eligible solvers on three terms: information, probability of success, and expected cost. A probability near 50% has high Bernoulli information, but uncertainty matters too: a well-measured 50% pair need not be the most valuable next experiment.</p>
+    <div class="equation">
+      z = s<sub>i</sub> − d<sub>j</sub><br>
+      ∂L / ∂z = p − y;&nbsp; ∂²L / ∂z² = p(1 − p) ≤ 1/4
+    </div>
+    <p>This curvature is the Fisher information for the scalar gap from one Bernoulli observation. It is largest at p = 0.5. An observation measures the gap; separating solver and node effects requires connections to other observations. To also favor uncertain pairs, the prototype uses:</p>
     <div class="equation">
       V<sub>ij</sub> ≈ 1/H<sub>sᵢ</sub> + 1/H<sub>dⱼ</sub><br>
       I<sub>ij</sub> = ½ log(1 + p<sub>ij</sub>(1 − p<sub>ij</sub>) V<sub>ij</sub>)<br>
@@ -79,60 +98,8 @@
       q(i | j) = ε/K + (1 − ε) × exp(U<sub>ij</sub>/τ) / Σ<sub>k</sub> exp(U<sub>kj</sub>/τ)
     </div>
     <p>Each of K eligible solvers retains at least ε/K selection probability. Return the selected solver, predictions and selection probabilities for later audit. The caller must enforce availability and hard budget limits before execution; a predicted mean cost is not a spending cap.</p>
+    <p>Adaptive allocation means each solver can face a different workload. Report model calibration on reserved data and preserve randomized coverage. Logged selection probabilities help audit allocation and support later policy evaluation, but do not by themselves correct model misspecification or make raw success rates comparable.</p>
     <p><strong>Implementation boundary:</strong> recommendations work, but automatic dispatch is not enabled. The next experiment is to compare this policy with uniform sampling and success-per-dollar baselines under the same budget, using held-out nodes to assess calibration and ranking quality.</p>
-  </section>
-
-  <section aria-labelledby="implementation">
-    <h2 id="implementation">What is implemented</h2>
-    <div class="table-wrap"><table class="wrap-table">
-      <caption>Local prototype status</caption>
-      <thead><tr><th scope="col">Component</th><th scope="col">Current behavior</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Score fitting</th><td>Jointly fits solver and node effects from the accumulated observations; reports convergence.</td></tr>
-        <tr><th scope="row">Online updates</th><td>Eligible completed runs feed a private event log and update scores. Duplicate event IDs do not count twice.</td></tr>
-        <tr><th scope="row">Persistent state</th><td>SQLite transactions keep events and score updates together. A revision check prevents a full fit from overwriting newer updates.</td></tr>
-        <tr><th scope="row">Sampling</th><td>Configurable utility, randomized selection and returned propensities. Recommendation only.</td></tr>
-        <tr><th scope="row">Validation</th><td>59 tests passed across the new Rasch and existing monitoring/rating suites. A six-record pilot—two strategies on three problems—ran through fitting successfully.</td></tr>
-      </tbody>
-    </table></div>
-    <p><strong>One observation means one graded node invocation, including its internal retries and tool calls.</strong> A final grade is not copied onto every internal retry. Per-retry learning needs per-retry grades and accounting that are not yet available.</p>
-    <p>Freshness and attribution are checked before ingestion. Cached or partially cache-seeded work is excluded; ambiguous whole-file attribution and mixed review/tiered runs are skipped. An infrastructure error does not become a failed proof, but its attributable, known cost/time can still update those dimensions. Missing cost is never zero.</p>
-    <p>The six-record pilot is a workflow check, not a reliable ranking. Private project data and benchmark scopes remain separate. No raw project data or backend source is published here.</p>
-    <p><strong>Still to validate:</strong> probability and cost/time calibration, prior sensitivity, uncertainty, and the benefit of adaptive sampling. Shared anchor nodes are important: disconnected solver–node groups are comparable only through the priors. Stable rankings and a nearly solved benchmark are different signals; a stopping rule is still to be designed.</p>
-  </section>
-
-  <section aria-labelledby="evolving">
-    <h2 id="evolving">Toward an evolving benchmark</h2>
-    <p>There are three distinct kinds of change. Updating a score is already possible; evolving the test bank while preserving a meaningful historical comparison requires additional machinery.</p>
-    <div class="table-wrap"><table class="wrap-table">
-      <caption>Current capability and proposed next steps</caption>
-      <thead><tr><th scope="col">Layer</th><th scope="col">Status</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Online calibration</th><td>Implemented locally: update solver and node parameters after eligible invocations, and refit accumulated data within a scope.</td></tr>
-        <tr><th scope="row">Adaptive evaluation</th><td>Recommendations implemented: choose a solver for a given open node. Automatic dispatch and a policy for choosing the next node are not implemented.</td></tr>
-        <tr><th scope="row">Evolving node bank</th><td>Proposed: admit new nodes, monitor coverage and saturation, rotate active items, and link calibrated scores across releases.</td></tr>
-      </tbody>
-    </table></div>
-
-    <h3>How the node bank could evolve</h3>
-    <ol>
-      <li><strong>Validate incoming nodes.</strong> Extract candidate obligations from authorized new papers or submissions. Check the statement, assumptions and Lean environment; deduplicate and assign an immutable identity. A changed statement or proof context becomes a new item version.</li>
-      <li><strong>Calibrate before promotion.</strong> Start new nodes as provisional, with uncertain difficulty. Allocate a controlled pilot budget across several solver strengths and shared anchor nodes. Promote them only when grading is reliable and there is enough overlap to assess their difficulty and usefulness.</li>
-      <li><strong>Refresh the active pool.</strong> Use observed coverage, uncertainty and validated signs of saturation to add informative nodes. Include new mathematical areas as well as harder problems. Reduce repeated testing of saturated items while retaining useful anchors and an audit history; invalid or withdrawn items need explicit exclusion and affected-score recalculation.</li>
-      <li><strong>Release a versioned snapshot.</strong> Record the active inventory, anchor set, eligibility rules, evaluation protocol and calibration revision. Preserve earlier score snapshots, and label any retrospective recomputation instead of silently changing historical results.</li>
-    </ol>
-    <p>The live proof pipeline can stop spending on a closed node. The evaluation system may still run a <em>fresh</em> attempt on a retained anchor to measure another solver; it must not count the previously cached proof as a new success.</p>
-
-    <h3>How scores could remain comparable</h3>
-    <p><strong>Keep a shared reference scale.</strong> Select unchanged anchor nodes spanning relevant difficulties and domains, and evaluate overlapping, versioned solver configurations on both old and new nodes. The solver–node observation graph must connect the releases; overlap alone is not proof that the model remains valid.</p>
-    <p>A proposed first linking method is to calibrate new items and solvers while holding vetted anchor difficulties at their reference values. An alternative is a joint calibration of linked releases with an explicit reference constraint. This follows the idea of <a href="https://www.rasch.org/rmt/rmt183q.htm">common-item anchoring</a>. The current backend fits separate scopes with zero-centered priors; <strong>it does not yet perform this cross-version linking</strong>. Identical priors or separately re-centering each new bank would not establish comparability.</p>
-    <p><strong>Check the anchors for drift.</strong> Rerun stable reference solver versions and examine whether anchor outcomes still fit the linked model. Changed dependencies, evaluation settings, contamination or solver specialization can undermine the link. Anchor drift is a known concern in <a href="https://www.ets.org/research/policy_research_reports/publications/report/2012/jewm.html">IRT equating research</a>; that work motivates a check here, not a guarantee for proof-solving data. Replace suspect anchors through an overlapping transition and report linking uncertainty. If the link cannot be supported, report separate scales.</p>
-    <p><strong>Separate progress from a changing workload.</strong> Report linked ability scores with their calibration version and uncertainty, alongside fresh performance on a fixed reference panel and coverage of the evolving pool. A drop in raw success rate after adding harder nodes does not by itself mean a solver became weaker. Model, tool or budget changes create a new solver configuration or protocol comparison. For cost and speed, also record the pricing basis and execution environment; stable proof difficulty alone does not align dollars or seconds.</p>
-
-    <h3>A version-to-version example</h3>
-    <p>Suppose release v1 has 100 nodes. For v2, introduce 40 new candidates and retain 20 unchanged nodes as anchors. Run several unchanged solver versions on the anchors and candidates under the same protocol. After checking overlap and anchor stability, calibrate the candidates onto the reference scale and decide which enter the active pool. These counts are illustrative, not minimum sample-size requirements.</p>
-    <p>If a reference solver’s raw success rate falls because v2 is harder, compare its linked strength estimate and fixed-panel performance before concluding that its ability changed. If anchor behavior has drifted, investigate the cause and qualify or withhold the cross-version comparison. <strong>The goal is a changing benchmark with an auditable reference scale—not an assumption that all scores remain comparable automatically.</strong></p>
-    <p>The next implementation milestone is a versioned node registry and admission pilot, followed by anchor-based linking and drift checks. Automatic node selection, routing and evidence-based stopping rules come after those checks are validated.</p>
   </section>
 
   <section aria-labelledby="example">
@@ -158,20 +125,106 @@
     <h3>What happens after a result?</h3>
     <p>Suppose B is selected and succeeds. Before this event, let both B and the hard node have four scored observations. With p = 0.5, learning rate 0.1 and the implemented prior shrinkage, the new strength is 0.54 and the new difficulty is 0.44. Their new gap is 0.10, so the next predicted success probability is about <strong>52.5%</strong>. Cost and time update from the actual measurements, even if the proof had failed.</p>
     <p>A later full fit reconciles this result with all other observations. As new nodes are added, keep shared anchors and evaluate prediction accuracy on held-out data; do not stop merely because the displayed ranking has stopped changing.</p>
+    <h3>What changes when the benchmark and solver evolve?</h3>
+    <p>Return to the original strengths A = 1.5 and B = 0.5. Their expected rates on the two original nodes are 80.6% and 61.6%. Admit a new node with linked difficulty 1.5: A has 50.0% predicted success and B has 26.9%. If the active pool now consists of the former hard node and this new node, their expected rates become 61.6% and 38.4%, even though neither solver changed.</p>
+    <p>Next, suppose an improved, separately versioned solver A′ is calibrated at strength 2.0. It has 62.2% success on the new node, and exp(2.0 − 1.5) ≈ 1.65 times A’s odds on every node under the model. The benchmark can now seek new informative candidates while retaining anchors and coverage. These numbers illustrate the proposed loop; they are not measurements of an implemented co-evolution system.</p>
+  </section>
+
+  <section aria-labelledby="evolving">
+    <h2 id="evolving">Co-evolution and comparable scores</h2>
+    <p>There are three distinct kinds of change. Updating a score is already possible; evolving the test bank while preserving a meaningful historical comparison requires additional machinery.</p>
+    <div class="table-wrap"><table class="wrap-table">
+      <caption>Current capability and proposed next steps</caption>
+      <thead><tr><th scope="col">Layer</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Online calibration</th><td>Implemented locally: update solver and node parameters after eligible invocations, and refit accumulated data within a scope.</td></tr>
+        <tr><th scope="row">Adaptive evaluation</th><td>Recommendations implemented: choose a solver for a given open node. Automatic dispatch and a policy for choosing the next node are not implemented.</td></tr>
+        <tr><th scope="row">Evolving node bank</th><td>Proposed: admit new nodes, monitor coverage and saturation, rotate active items, and link calibrated scores across releases.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Solver development is a separate proposed part of the loop: failures can guide changes to prompts, tools or proof strategies, and each changed solver receives a new identity. Keep an audit panel out of this development feedback, and record exposure to public development nodes. Otherwise improvements may reflect memorization or tuning to the active pool.</p>
+
+    <h3>How the node bank could evolve</h3>
+    <ol>
+      <li><strong>Validate incoming nodes.</strong> Extract candidate obligations from authorized new papers or submissions. Check the statement, assumptions and Lean environment; deduplicate and assign an immutable identity. A changed statement or proof context becomes a new item version.</li>
+      <li><strong>Calibrate before promotion.</strong> Start new nodes as provisional, with uncertain difficulty. Allocate a controlled pilot budget across several solver strengths and shared anchor nodes. Promote them only when grading is reliable and there is enough overlap to assess their difficulty and usefulness.</li>
+      <li><strong>Refresh the active pool.</strong> Use observed coverage, uncertainty and validated signs of saturation to add informative nodes. Include new mathematical areas as well as harder problems. Reduce repeated testing of saturated items while retaining useful anchors and an audit history; invalid or withdrawn items need explicit exclusion and affected-score recalculation.</li>
+      <li><strong>Release a versioned snapshot.</strong> Record the active inventory, anchor set, eligibility rules, evaluation protocol and calibration revision. Preserve earlier score snapshots, and label any retrospective recomputation instead of silently changing historical results.</li>
+    </ol>
+    <div class="equation">
+      B<sub>t+1</sub> = (B<sub>t</sub> ∖ R<sub>t</sub>) ∪ N<sub>t</sub><br>
+      A ⊆ B<sub>t</sub> ∩ B<sub>t+1</sub>
+    </div>
+    <p>B is the active bank, R contains items rotated out, N contains admitted candidates, and A is the retained anchor set. This is a proposed release rule, not an implemented scheduler. Archive rotated items and observations. Candidate selection should balance informative difficulty, uncertainty and mathematical coverage; no single success-rate threshold establishes saturation.</p>
+    <p>The live proof pipeline can stop spending on a closed node. The evaluation system may still run a <em>fresh</em> attempt on a retained anchor to measure another solver; it must not count the previously cached proof as a new success.</p>
+
+    <h3>How scores could remain comparable</h3>
+    <p>The expected raw solve rate on a bank B is:</p>
+    <div class="equation">
+      r<sub>i</sub>(B) = (1 / |B|) Σ<sub>j ∈ B</sub> σ(s<sub>i</sub> − d<sub>j</sub>)
+    </div>
+    <p>Even with unchanged strength, this average falls when the bank gets harder. Ability and workload therefore need separate estimates. There is also an arbitrary origin in the Rasch likelihood:</p>
+    <div class="equation">
+      σ((s<sub>i</sub> + k) − (d<sub>j</sub> + k)) = σ(s<sub>i</sub> − d<sub>j</sub>)
+    </div>
+    <p>Zero-centered priors fix an origin within each fit, but independently fitted releases need not share an empirical reference. The unit-discrimination model fixes the log-odds unit; the common origin still needs to be linked.</p>
+    <p><strong>Keep a shared reference scale.</strong> Select unchanged anchor nodes spanning relevant difficulties and domains, and evaluate overlapping, versioned solver configurations on both old and new nodes. The solver–node observation graph must connect the releases; overlap alone is not proof that the model remains valid.</p>
+    <p>A proposed first linking method is to calibrate new items and solvers while holding vetted anchor difficulties at their reference values. An alternative is a joint calibration of linked releases with an explicit reference constraint. This follows the idea of <a href="https://www.rasch.org/rmt/rmt183q.htm">common-item anchoring</a>. The current backend fits separate scopes with zero-centered priors; <strong>it does not yet perform this cross-version linking</strong>. Identical priors or separately re-centering each new bank would not establish comparability.</p>
+    <details>
+      <summary>The mathematics of a shared origin</summary>
+      <p>As an illustrative diagnostic for two separately calibrated Rasch releases with the same log-odds unit, choose positive anchor weights w<sub>j</sub> summing to 1 and estimate the offset:</p>
+      <div class="equation">
+        k = Σ<sub>j ∈ A</sub> w<sub>j</sub>(d<sub>j,reference</sub> − d<sub>j,new</sub>)<br>
+        s<sub>i,linked</sub> = s<sub>i,new</sub> + k<br>
+        d<sub>j,linked</sub> = d<sub>j,new</sub> + k
+      </div>
+      <p>Adding the same offset to both coordinates preserves every new-release prediction. For example, if stable anchors are all estimated 0.3 units above their reference values, k = −0.3; a new-release strength of 1.8 maps to 1.5. This is an origin correction, not evidence of a performance change.</p>
+      <p>Anchor residuals d<sub>j,new</sub> + k − d<sub>j,reference</sub> should be assessed against estimation uncertainty and by domain. A shift cannot repair item-specific drift, unequal shrinkage or a poor scalar model. For the prototype, constrained joint calibration is the preferred next implementation to test; uncertainty in reference anchors and the link must be propagated rather than treating them as known perfectly.</p>
+    </details>
+    <p><strong>Check the anchors for drift.</strong> Rerun stable reference solver versions and examine whether anchor outcomes still fit the linked model. Changed dependencies, evaluation settings, contamination or solver specialization can undermine the link. Anchor drift is a known concern in <a href="https://www.ets.org/research/policy_research_reports/publications/report/2012/jewm.html">IRT equating research</a>; that work motivates a check here, not a guarantee for proof-solving data. Replace suspect anchors through an overlapping transition and report linking uncertainty. If the link cannot be supported, report separate scales.</p>
+    <p><strong>Separate progress from a changing workload.</strong> Report linked ability scores with their calibration version and uncertainty, alongside fresh performance on a fixed reference panel and coverage of the evolving pool. A drop in raw success rate after adding harder nodes does not by itself mean a solver became weaker. Model, tool or budget changes create a new solver configuration or protocol comparison. For cost and speed, also record the pricing basis and execution environment; stable proof difficulty alone does not align dollars or seconds.</p>
+
+    <h3>A version-to-version example</h3>
+    <p>Suppose release v1 has 100 nodes. For v2, introduce 40 new candidates and retain 20 unchanged nodes as anchors. Run several unchanged solver versions on the anchors and candidates under the same protocol. After checking overlap and anchor stability, calibrate the candidates onto the reference scale and decide which enter the active pool. These counts are illustrative, not minimum sample-size requirements.</p>
+    <p>If a reference solver’s raw success rate falls because v2 is harder, compare its linked strength estimate and fixed-panel performance before concluding that its ability changed. If anchor behavior has drifted, investigate the cause and qualify or withhold the cross-version comparison. <strong>The goal is a changing benchmark with an auditable, empirically checked reference scale.</strong></p>
+    <p>The next implementation milestone is a versioned node registry and admission pilot, followed by anchor-based linking and drift checks. Automatic node selection, routing and evidence-based stopping rules come after those checks are validated.</p>
+  </section>
+
+  <section aria-labelledby="implementation">
+    <h2 id="implementation">What is implemented</h2>
+    <div class="table-wrap"><table class="wrap-table">
+      <caption>Local prototype status</caption>
+      <thead><tr><th scope="col">Component</th><th scope="col">Current behavior</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Score fitting</th><td>Jointly fits solver and node effects from the accumulated observations; reports convergence.</td></tr>
+        <tr><th scope="row">Online updates</th><td>Eligible completed runs feed a private event log and update scores. Duplicate event IDs do not count twice.</td></tr>
+        <tr><th scope="row">Persistent state</th><td>SQLite transactions keep events and score updates together. A revision check prevents a full fit from overwriting newer updates.</td></tr>
+        <tr><th scope="row">Sampling</th><td>Configurable utility, randomized selection and returned propensities. Recommendation only.</td></tr>
+        <tr><th scope="row">Validation</th><td>59 tests passed across the new Rasch and existing monitoring/rating suites. A six-record pilot—two strategies on three problems—ran through fitting successfully.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>One observation means one graded node invocation, including its internal retries and tool calls.</strong> A final grade is not copied onto every internal retry. Per-retry learning needs per-retry grades and accounting that are not yet available.</p>
+    <p>Freshness and attribution are checked before ingestion. Cached or partially cache-seeded work is excluded; ambiguous whole-file attribution and mixed review/tiered runs are skipped. An infrastructure error does not become a failed proof, but its attributable, known cost/time can still update those dimensions. Missing cost is never zero.</p>
+    <p>The six-record pilot is a workflow check, not a reliable ranking. Private project data and benchmark scopes remain separate. No raw project data or backend source is published here.</p>
+    <p><strong>Still to validate:</strong> probability and cost/time calibration, prior sensitivity, uncertainty, and the benefit of adaptive sampling. Shared anchor nodes are important: disconnected solver–node groups are comparable only through the priors. Stable rankings and a nearly solved benchmark are different signals; a stopping rule is still to be designed.</p>
   </section>
 
   <section aria-labelledby="papers">
     <h2 id="papers">Related papers</h2>
     <p>These papers inform different parts of the design. They do not establish that the current heuristic or cost model is optimal for Lean proof solving.</p>
     <ol class="references">
+      <li id="ref-coevolution"><a href="https://arxiv.org/abs/2607.17352">Self-Modifying Lean Proof Agents with Verifier-Grounded Benchmark Coevolution</a><br><span class="reference-meta">Li, Wu, Gan &amp; Liu · July 2026 preprint</span><p>The closest setting: evolving Lean proof agents and an active benchmark drawn from a tiered candidate pool. Mastered tasks are replaced with same-tier or harder tasks. The paper recalibrates scores by rerunning a champion solver on the changed bank. Our proposed linking instead uses shared Rasch anchor items and overlapping solver versions; a single reference solver’s multiplicative normalization does not establish invariant comparisons for every solver.</p></li>
+      <li id="ref-self-evolving"><a href="https://aclanthology.org/2025.coling-main.223/">Benchmark Self-Evolving: A Multi-Agent Framework for Dynamic LLM Evaluation</a><br><span class="reference-meta">Wang et al. · COLING 2025</span><p>Uses multiple agents and six reframing operations to extend benchmark instances. Relevant to generating candidate nodes and exposing new weaknesses. Our formal-mathematics setting additionally needs statement, context and verification checks before candidates enter the scored bank.</p></li>
+      <li id="ref-dynabench"><a href="https://aclanthology.org/2021.naacl-main.324/">Dynabench: Rethinking Benchmarking in NLP</a><br><span class="reference-meta">Kiela et al. · NAACL 2021</span><p>A human-and-model feedback loop for collecting challenging examples. A precedent for using current solver failures to guide researcher-submitted nodes and benchmark development.</p></li>
       <li id="ref-tiny"><a href="https://proceedings.mlr.press/v235/maia-polo24a.html">tinyBenchmarks: evaluating LLMs with fewer examples</a><br><span class="reference-meta">Maia Polo et al. · ICML 2024</span><p>Uses representative examples and IRT-based estimation to reduce evaluation effort. Relevant to choosing shared anchor nodes and testing how well a small sample predicts broader performance. Its multidimensional IRT model is richer than the scalar Rasch success model used here.</p></li>
-      <li id="ref-fluid"><a href="https://arxiv.org/abs/2509.11106">Fluid Language Model Benchmarking</a><br><span class="reference-meta">Hofmann et al. · 2025 preprint</span><p>Combines IRT ability scores with dynamic item selection, including Fisher-information-based selection. Especially relevant to adaptive evaluation and saturation. It uses a 2PL model with item discrimination; our unit-discrimination choice preserves the requested problem-independent odds ratio.</p></li>
+      <li id="ref-fluid"><a href="https://arxiv.org/abs/2509.11106">Fluid Language Model Benchmarking</a><br><span class="reference-meta">Hofmann et al. · COLM 2025</span><p>Combines IRT ability scores with dynamic item selection, including Fisher-information-based selection. Especially relevant to adaptive evaluation and saturation. It uses a 2PL model with item discrimination; our unit-discrimination choice preserves the requested problem-independent odds ratio. Adaptive selection from a bank and changing the bank itself are distinct design components.</p></li>
+      <li id="ref-drift"><a href="https://journals.sagepub.com/doi/10.1177/0146621612455090">Rasch Scale Stability in the Presence of Item Parameter and Trait Drift</a><br><span class="reference-meta">Babcock &amp; Albano · Applied Psychological Measurement, 2012</span><p>Studies stability of Rasch scales under item and population drift. Motivates checking anchor stability and linking uncertainty when the node bank changes; its educational measurement setting does not itself validate comparability for Lean solvers.</p></li>
       <li id="ref-online"><a href="https://dare.uva.nl/id/de65bb65-d198-4dbc-ac7b-bc25ca23e627">Computer adaptive practice of Maths ability using a new item response model for on the fly ability and difficulty estimation</a><br><span class="reference-meta">Klinkenberg, Straatemeier &amp; van der Maas · Computers &amp; Education, 2011</span><p>Updates learner ability and item difficulty after individual responses using an Elo-related model. A useful precedent for online joint calibration. Its educational practice setting and combined accuracy/time scoring differ from our separate solver objectives.</p></li>
       <li id="ref-speed"><a href="https://research.utwente.nl/en/publications/a-hierarchical-framework-for-modeling-speed-and-accuracy-on-test--2/">A Hierarchical Framework for Modeling Speed and Accuracy on Test Items</a><br><span class="reference-meta">van der Linden · Psychometrika, 2007</span><p>Separates ability and speed and models their relationships through a hierarchy. Relevant to keeping solver speed distinct from strength. Our current mean-duration model does not implement that paper’s hierarchical response-time distribution or correlations.</p></li>
       <li id="ref-ids"><a href="https://papers.neurips.cc/paper_files/paper/2014/hash/90720a2fcc41f9332e6a1558da327089-Abstract.html">Learning to Optimize via Information-Directed Sampling</a><br><span class="reference-meta">Russo &amp; Van Roy · NeurIPS 2014</span><p>Balances immediate regret against information about the optimal action. A principled direction for improving the exploration–exploitation tradeoff. Our weighted utility and diagonal information proxy are not an implementation of IDS.</p></li>
       <li id="ref-budget"><a href="https://arxiv.org/abs/1305.2545">Bandits with Knapsacks</a><br><span class="reference-meta">Badanidiyuru, Kleinberg &amp; Slivkins · FOCS 2013; revised manuscript 2017</span><p>Studies online learning when actions consume limited resources. Relevant to a future policy that manages a total spending budget. The current expected-cost penalty does not provide those algorithms’ budget or regret guarantees.</p></li>
     </ol>
-    <p>For the basic Rasch formulation, see the <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan item-response model documentation</a>. A practical reading order is tinyBenchmarks and Fluid Benchmarking for evaluation, then the online-calibration, speed and sampling papers for the extensions.</p>
+    <p>For the basic Rasch formulation, see the <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan item-response model documentation</a>. Start with the Lean coevolution paper for the feedback loop, Fluid Benchmarking for adaptive measurement, and the scale-stability paper for cross-release comparisons. This proposal combines those research directions; their guarantees do not automatically transfer to our prototype.</p>
   </section>
   <footer>
     <p>Rose Xu · Prototype implementation notes · Updated October 26, 2026</p>

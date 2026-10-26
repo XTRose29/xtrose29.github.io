@@ -3,55 +3,143 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A simple proposal for a Rasch-based solver leaderboard: main idea, mathematical details, and an example.">
-  <title>Rasch leaderboard proposal · Rose Xu</title>
+  <meta name="description" content="A Rasch-based solver benchmark: strength, cost and speed scores, online updates, adaptive sampling, a worked example and related papers.">
+  <title>Rasch benchmark: model and implementation · Rose Xu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <section aria-labelledby="idea">
     <h1 id="idea">Main idea</h1>
-    <p>Learn a score for each solver’s ability and each node’s difficulty. Predict whether a solver can solve a node from the difference between those scores. Update the estimates as verified results arrive.</p>
-    <p>Estimate cost and runtime separately, with their own solver parameters. Test whether node difficulty helps predict them too.</p>
-    <p>Start with shared nodes evaluated by every solver. Then balance three goals: solve problems cheaply, improve uncertain estimates, and explore less-tested pairs. A tentative allocation is <strong>60% efficient solving, 30% learning, and 10% random exploration</strong>, within an agreed budget.</p>
+    <p>Build a benchmark that learns <strong>which solvers are strong, which nodes are difficult, and what an attempt is likely to cost</strong>. Use those estimates to choose the next solver, balancing information gain, closing nodes, and spending.</p>
+    <p>A node is a proof obligation, such as a lemma or theorem. A solver is a model together with its strategy and implementation. Compare results within a recorded protocol: fixed inputs, environment, retry limits, tools and budgets. Start with overlapping nodes so the solvers can be compared on a common scale.</p>
+    <p>The loop is: <strong>choose a solver → run it → verify the result → record outcome, cost and time → update scores → choose again.</strong> Raw success rates remain useful, but can be misleading when different solvers receive different difficulties.</p>
+    <p class="note"><strong>Current status:</strong> a local backend prototype implements fitting, online updates and sampling recommendations. It has not replaced production routing or the public leaderboard. The numerical example below is illustrative, not an experimental result.</p>
+    <nav aria-label="On this page"><a href="#math">Scoring model</a> · <a href="#sampling">Sampling</a> · <a href="#implementation">Implementation</a> · <a href="#example">Example</a> · <a href="#papers">Papers</a></nav>
   </section>
 
   <section aria-labelledby="math">
     <h2 id="math">Detailed math</h2>
-    <h3>1. Success probability</h3>
-    <p>Let <var>s<sub>i</sub></var> be solver <var>i</var>’s ability, <var>d<sub>j</sub></var> node <var>j</var>’s difficulty, and <var>y</var> the observed outcome: 1 for a verified proof, 0 for failure within the attempt budget.</p>
-    <div class="equation">p<sub>ij</sub> = P(y = 1) = σ(s<sub>i</sub> − d<sub>j</sub>)<br>σ(x) = 1 / (1 + exp(−x))</div>
-    <p>Only the gap matters. Adding 1 to both scores leaves the prediction unchanged. Fix the mean node difficulty at zero to anchor the scale.</p>
+    <h3>Task 1 · Strength, cost, speed and node difficulty</h3>
+    <p>Solver <var>i</var> has strength <var>s<sub>i</sub></var>, cost score <var>c<sub>i</sub></var>, and speed score <var>v<sub>i</sub></var>. Node <var>j</var> has a latent vector <var>(d<sub>j</sub>, a<sub>j</sub>, b<sub>j</sub>)</var>: proof difficulty, cost effect and time effect. Only the solver scores are intended for reporting.</p>
+    <div class="equation">
+      p<sub>ij</sub> = P(solve | i, j) = σ(s<sub>i</sub> − d<sub>j</sub>)<br>
+      σ(x) = 1 / (1 + exp(−x))<br>
+      E[cost | i, j] = $0.10 × exp(c<sub>i</sub> + a<sub>j</sub>)<br>
+      E[time | i, j] = 30 seconds × exp(−v<sub>i</sub> + b<sub>j</sub>)
+    </div>
+    <p>Higher strength and speed are better; lower cost is better. Separate node effects allow a problem to be expensive without assuming it is equally difficult or slow. The $0.10 and 30-second scales define the current zero-score starting estimates; they are tunable priors, not measured averages.</p>
+    <p>The success model has the requested <strong>problem-independent odds multiplier</strong>:</p>
+    <div class="equation">
+      odds<sub>ij</sub> = p<sub>ij</sub> / (1 − p<sub>ij</sub>) = exp(s<sub>i</sub> − d<sub>j</sub>)<br>
+      odds<sub>Aj</sub> / odds<sub>Bj</sub> = exp(s<sub>A</sub> − s<sub>B</sub>)
+    </div>
+    <p>This compares odds, not probabilities. The property comes from keeping the success model one-dimensional with unit discrimination. Giving every node its own discrimination would generally make this ratio depend on the node.</p>
 
-    <h3>2. Estimate the scores</h3>
-    <p>After each batch, fit the observed outcomes by minimizing the regularized negative log-likelihood:</p>
-    <div class="equation">L = −Σ<sub>observed attempts</sub> [y log p<sub>ij</sub> + (1 − y) log(1 − p<sub>ij</sub>)]<br>　 + λ<sub>s</sub> Σ<sub>i</sub> s<sub>i</sub>² + λ<sub>d</sub> Σ<sub>j</sub> (d<sub>j</sub> − μ<sub>j</sub>)²</div>
-    <p>Positive λ values prevent extreme estimates when data are sparse. Use μ<sub>j</sub> = 0 initially, or a centered initial difficulty estimate. This is a Gaussian-prior MAP fit. Estimate uncertainty as well; the fitted scores alone do not tell us how reliable a ranking is.</p>
+    <h3>Full recalibration</h3>
+    <p>Fit all eligible observations to date within a dataset/protocol scope. Success uses Bernoulli negative log likelihood. Cost and time use a quasi-Poisson loss to estimate <em>expected arithmetic cost and duration</em>, using both successful and unsuccessful attempts. This does not assume dollars or seconds are Poisson counts.</p>
+    <details>
+      <summary>Objective and optimization</summary>
+      <div class="equation">
+        L = Σ<sub>graded</sub> [log(1 + exp(s<sub>i</sub> − d<sub>j</sub>)) − y(s<sub>i</sub> − d<sub>j</sub>)]<br>
+        + Σ<sub>cost observed</sub> [exp(c<sub>i</sub> + a<sub>j</sub>) − (C / 0.10)(c<sub>i</sub> + a<sub>j</sub>)]<br>
+        + Σ<sub>time observed</sub> [exp(−v<sub>i</sub> + b<sub>j</sub>) − (T / 30)(−v<sub>i</sub> + b<sub>j</sub>)]<br>
+        + ½ Σ<sub>all coordinates θ</sub> θ²
+      </div>
+      <p>Here y is 1 for a verified proof and 0 for a valid unsuccessful attempt; C is dollars and T is seconds. Independent zero-centered Gaussian priors with precision 1 anchor the additive scales and keep sparse or all-success estimates finite. The prototype uses damped Newton steps, sparse conjugate-gradient solves and line search. Nonconvergent fits do not replace the current state.</p>
+    </details>
 
-    <h3>3. Cost, time, and the next evaluation</h3>
-    <p>A simple starting model for expected dollars and seconds per attempt is:</p>
-    <div class="equation">Ĉ<sub>ij</sub> = exp(c<sub>i</sub> + β<sub>C</sub>d<sub>j</sub>)<br>T̂<sub>ij</sub> = exp(t<sub>i</sub> + β<sub>T</sub>d<sub>j</sub>)</div>
-    <p>Here c<sub>i</sub> and t<sub>i</sub> are separate solver parameters; the β coefficients describe how difficulty relates to each objective. Fit using successful and failed attempts. Compare against solver-only baselines to check whether sharing difficulty is useful.</p>
-    <div class="equation">Efficient-solving priority = p<sub>ij</sub> / max(Ĉ<sub>ij</sub>, ε)<br>Learning priority = p<sub>ij</sub>(1 − p<sub>ij</sub>) Var(s<sub>i</sub> − d<sub>j</sub>) / max(Ĉ<sub>ij</sub>, ε)</div>
-    <p>The learning score is a heuristic: favor uncertain ability–difficulty gaps near 50% success, adjusted for cost. ε is a small positive cost floor. Apply a latency limit and a total spending cap; random exploration maintains coverage.</p>
+    <h3>Online updates</h3>
+    <p>After each eligible invocation, update the relevant solver and node coordinates. The success likelihood contributes <var>p − y</var> to the strength gradient and <var>y − p</var> to the difficulty gradient. Unexpected success raises strength and lowers difficulty; other observations help distinguish the two explanations.</p>
+    <details>
+      <summary>Exact update used in the prototype</summary>
+      <div class="equation">
+        g<sub>s</sub> = p − y + s<sub>i</sub> / n<sub>i</sub><br>
+        g<sub>d</sub> = y − p + d<sub>j</sub> / n<sub>j</sub><br>
+        θ ← clip(θ − clip(0.1 × g<sub>θ</sub>, −0.25, 0.25), −20, 20)
+      </div>
+      <p>Counts n include the new observation for that coordinate. For cost and time, use the residual exp(η) − measurement/unit, with the signs from their predictors and the same count-scaled prior shrinkage. Missing measurements leave that dimension untouched. Both sides use the pre-update prediction.</p>
+      <p>This is an order-dependent, regularized stochastic-gradient approximation. Periodic full recalibration provides a consistent reference fit; a scheduling service for those recalibrations has not yet been added.</p>
+    </details>
+  </section>
+
+  <section aria-labelledby="sampling">
+    <h2 id="sampling">Task 2 · Choose the next solver</h2>
+    <p>For an open node, score the eligible solvers on three terms: information, probability of success, and expected cost. A probability near 50% has high Bernoulli information, but uncertainty matters too: a well-measured 50% pair need not be the most valuable next experiment.</p>
+    <div class="equation">
+      V<sub>ij</sub> ≈ 1/H<sub>sᵢ</sub> + 1/H<sub>dⱼ</sub><br>
+      I<sub>ij</sub> = ½ log(1 + p<sub>ij</sub>(1 − p<sub>ij</sub>) V<sub>ij</sub>)<br>
+      U<sub>ij</sub> = w<sub>I</sub> I<sub>ij</sub>/max<sub>k</sub> I<sub>kj</sub><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + w<sub>S</sub> p<sub>ij</sub> − w<sub>C</sub> E[cost | i, j]/C<sub>scale</sub>
+    </div>
+    <p>H is diagonal curvature plus prior precision. I is an <strong>information-gain proxy</strong>, not exact Bayesian information gain or a calibrated confidence interval; it omits solver–node covariance. Maximization is over the currently eligible solvers for this node.</p>
+    <p>Current defaults are weights <strong>0.4 / 0.4 / 0.2</strong> for information / solving / cost, and C<sub>scale</sub> = $0.10. These are utility weights, not percentages of the testing budget. Convert utilities to selection probabilities with temperature τ = 0.2 and exploration ε = 0.1:</p>
+    <div class="equation">
+      q(i | j) = ε/K + (1 − ε) × exp(U<sub>ij</sub>/τ) / Σ<sub>k</sub> exp(U<sub>kj</sub>/τ)
+    </div>
+    <p>Each of K eligible solvers retains at least ε/K selection probability. Return the selected solver, predictions and selection probabilities for later audit. The caller must enforce availability and hard budget limits before execution; a predicted mean cost is not a spending cap.</p>
+    <p><strong>Implementation boundary:</strong> recommendations work, but automatic dispatch is not enabled. The next experiment is to compare this policy with uniform sampling and success-per-dollar baselines under the same budget, using held-out nodes to assess calibration and ranking quality.</p>
+  </section>
+
+  <section aria-labelledby="implementation">
+    <h2 id="implementation">What is implemented</h2>
+    <div class="table-wrap"><table class="wrap-table">
+      <caption>Local prototype status</caption>
+      <thead><tr><th scope="col">Component</th><th scope="col">Current behavior</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Score fitting</th><td>Jointly fits solver and node effects from the accumulated observations; reports convergence.</td></tr>
+        <tr><th scope="row">Online updates</th><td>Eligible completed runs feed a private event log and update scores. Duplicate event IDs do not count twice.</td></tr>
+        <tr><th scope="row">Persistent state</th><td>SQLite transactions keep events and score updates together. A revision check prevents a full fit from overwriting newer updates.</td></tr>
+        <tr><th scope="row">Sampling</th><td>Configurable utility, randomized selection and returned propensities. Recommendation only.</td></tr>
+        <tr><th scope="row">Validation</th><td>59 tests passed across the new Rasch and existing monitoring/rating suites. A six-record pilot—two strategies on three problems—ran through fitting successfully.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>One observation means one graded node invocation, including its internal retries and tool calls.</strong> A final grade is not copied onto every internal retry. Per-retry learning needs per-retry grades and accounting that are not yet available.</p>
+    <p>Freshness and attribution are checked before ingestion. Cached or partially cache-seeded work is excluded; ambiguous whole-file attribution and mixed review/tiered runs are skipped. An infrastructure error does not become a failed proof, but its attributable, known cost/time can still update those dimensions. Missing cost is never zero.</p>
+    <p>The six-record pilot is a workflow check, not a reliable ranking. Private project data and benchmark scopes remain separate. No raw project data or backend source is published here.</p>
+    <p><strong>Still to validate:</strong> probability and cost/time calibration, prior sensitivity, uncertainty, and the benefit of adaptive sampling. Shared anchor nodes are important: disconnected solver–node groups are comparable only through the priors. Stable rankings and a nearly solved benchmark are different signals; a stopping rule is still to be designed.</p>
   </section>
 
   <section aria-labelledby="example">
     <h2 id="example">Simple example</h2>
-    <p>Suppose solver A has ability 1.5 and solver B has ability 0.5. An easy node has difficulty −0.5; a hard node has difficulty 0.5. These are illustrative numbers, not experimental results.</p>
+    <p>Consider two fictional solvers: A has strength 1.5, B has strength 0.5. An easy node has difficulty −0.5 and a hard node has difficulty 0.5.</p>
     <div class="table-wrap"><table>
-      <caption>Predicted probability of solving a node</caption>
-      <thead><tr><th>Solver</th><th>Easy node</th><th>Hard node</th></tr></thead>
-      <tbody><tr><th>A · ability 1.5</th><td>88%</td><td>73%</td></tr><tr><th>B · ability 0.5</th><td>73%</td><td>50%</td></tr></tbody>
+      <caption>Illustrative predictions, not experimental results</caption>
+      <thead><tr><th scope="col">Solver</th><th scope="col">Easy node</th><th scope="col">Hard node</th><th scope="col">Cost / attempt</th><th scope="col">Time / attempt</th></tr></thead>
+      <tbody><tr><th scope="row">A</th><td>88.1%</td><td>73.1%</td><td>$0.20</td><td>20 s</td></tr><tr><th scope="row">B</th><td>73.1%</td><td>50.0%</td><td>$0.05</td><td>10 s</td></tr></tbody>
     </table></div>
-    <p><strong>A on the hard node and B on the easy node both have a gap of 1, so both have about 73% success.</strong></p>
-    <p>Now suppose an attempt costs $2 for A and $0.50 for B. On the hard node, A gives 0.73 / 2 ≈ 0.37 expected successes per dollar, while B gives 0.50 / 0.50 = 1.00. A is more likely to solve it in one attempt; B has better predicted success per dollar.</p>
-    <p>If B’s ability on hard nodes is uncertain, testing B may also be valuable for learning. If B solves the node, the model has evidence to raise B’s ability, lower the node’s difficulty, or both; results from other solvers and nodes help distinguish those explanations.</p>
-    <p>For a first pilot, compare this sampling policy with uniform sampling under the same budget. Use a fixed evaluation set to check prediction accuracy and ranking uncertainty. Treat stable estimates and a nearly solved benchmark as separate signals; keep shared anchor nodes when adding harder problems.</p>
+    <p>For this example, both node cost/time effects are zero. Set c<sub>A</sub> = log 2, c<sub>B</sub> = log 0.5, v<sub>A</sub> = log 1.5, and v<sub>B</sub> = log 3 to obtain those costs and durations.</p>
+    <p><strong>A on the hard node and B on the easy node both have a gap of 1, giving 73.1% success.</strong> On either node, A’s success odds are exp(1.5 − 0.5) ≈ 2.72 times B’s. This does not mean A’s probability is 2.72 times larger.</p>
+
+    <h3>Which solver gets the hard node next?</h3>
+    <p>A is more likely to close it in one attempt. B is cheaper and closer to 50%. To make the sampling calculation explicit, suppose H<sub>sA</sub> = H<sub>sB</sub> = H<sub>d</sub> = 2, so V = 1 for both pairs. Using the defaults above:</p>
+    <div class="table-wrap"><table>
+      <caption>One sampling decision, before observing a new result</caption>
+      <thead><tr><th scope="col">Solver</th><th scope="col">Information proxy I</th><th scope="col">Utility U</th><th scope="col">Selection probability q</th></tr></thead>
+      <tbody><tr><th scope="row">A</th><td>0.0897</td><td>0.2142</td><td>22.4%</td></tr><tr><th scope="row">B</th><td>0.1116</td><td>0.5000</td><td>77.6%</td></tr></tbody>
+    </table></div>
+    <p>The policy favors B here, but can still select A. Increasing the weight on closing nodes would favor A more; emphasizing cost or learning changes the decision. Time is predicted and available to the caller, but is not a fourth term in this prototype’s utility.</p>
+
+    <h3>What happens after a result?</h3>
+    <p>Suppose B is selected and succeeds. Before this event, let both B and the hard node have four scored observations. With p = 0.5, learning rate 0.1 and the implemented prior shrinkage, the new strength is 0.54 and the new difficulty is 0.44. Their new gap is 0.10, so the next predicted success probability is about <strong>52.5%</strong>. Cost and time update from the actual measurements, even if the proof had failed.</p>
+    <p>A later full fit reconciles this result with all other observations. As new nodes are added, keep shared anchors and evaluate prediction accuracy on held-out data; do not stop merely because the displayed ranking has stopped changing.</p>
+  </section>
+
+  <section aria-labelledby="papers">
+    <h2 id="papers">Related papers</h2>
+    <p>These papers inform different parts of the design. They do not establish that the current heuristic or cost model is optimal for Lean proof solving.</p>
+    <ol class="references">
+      <li id="ref-tiny"><a href="https://proceedings.mlr.press/v235/maia-polo24a.html">tinyBenchmarks: evaluating LLMs with fewer examples</a><br><span class="reference-meta">Maia Polo et al. · ICML 2024</span><p>Uses representative examples and IRT-based estimation to reduce evaluation effort. Relevant to choosing shared anchor nodes and testing how well a small sample predicts broader performance. Its multidimensional IRT model is richer than the scalar Rasch success model used here.</p></li>
+      <li id="ref-fluid"><a href="https://arxiv.org/abs/2509.11106">Fluid Language Model Benchmarking</a><br><span class="reference-meta">Hofmann et al. · 2025 preprint</span><p>Combines IRT ability scores with dynamic item selection, including Fisher-information-based selection. Especially relevant to adaptive evaluation and saturation. It uses a 2PL model with item discrimination; our unit-discrimination choice preserves the requested problem-independent odds ratio.</p></li>
+      <li id="ref-online"><a href="https://dare.uva.nl/id/de65bb65-d198-4dbc-ac7b-bc25ca23e627">Computer adaptive practice of Maths ability using a new item response model for on the fly ability and difficulty estimation</a><br><span class="reference-meta">Klinkenberg, Straatemeier &amp; van der Maas · Computers &amp; Education, 2011</span><p>Updates learner ability and item difficulty after individual responses using an Elo-related model. A useful precedent for online joint calibration. Its educational practice setting and combined accuracy/time scoring differ from our separate solver objectives.</p></li>
+      <li id="ref-speed"><a href="https://research.utwente.nl/en/publications/a-hierarchical-framework-for-modeling-speed-and-accuracy-on-test--2/">A Hierarchical Framework for Modeling Speed and Accuracy on Test Items</a><br><span class="reference-meta">van der Linden · Psychometrika, 2007</span><p>Separates ability and speed and models their relationships through a hierarchy. Relevant to keeping solver speed distinct from strength. Our current mean-duration model does not implement that paper’s hierarchical response-time distribution or correlations.</p></li>
+      <li id="ref-ids"><a href="https://papers.neurips.cc/paper_files/paper/2014/hash/90720a2fcc41f9332e6a1558da327089-Abstract.html">Learning to Optimize via Information-Directed Sampling</a><br><span class="reference-meta">Russo &amp; Van Roy · NeurIPS 2014</span><p>Balances immediate regret against information about the optimal action. A principled direction for improving the exploration–exploitation tradeoff. Our weighted utility and diagonal information proxy are not an implementation of IDS.</p></li>
+      <li id="ref-budget"><a href="https://arxiv.org/abs/1305.2545">Bandits with Knapsacks</a><br><span class="reference-meta">Badanidiyuru, Kleinberg &amp; Slivkins · FOCS 2013; revised manuscript 2017</span><p>Studies online learning when actions consume limited resources. Relevant to a future policy that manages a total spending budget. The current expected-cost penalty does not provide those algorithms’ budget or regret guarantees.</p></li>
+    </ol>
+    <p>For the basic Rasch formulation, see the <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan item-response model documentation</a>. A practical reading order is tinyBenchmarks and Fluid Benchmarking for evaluation, then the online-calibration, speed and sampling papers for the extensions.</p>
   </section>
   <footer>
-    <p>Draft proposal · Rose Xu · October 2026</p>
-    <p>References: <a href="https://mc-stan.org/docs/stan-users-guide/regression.html#item-response-theory-models">Stan: Rasch / item-response models</a> · <a href="https://en.wikipedia.org/wiki/Rasch_model_estimation">Rasch model estimation</a></p>
+    <p>Rose Xu · Prototype implementation notes · Updated October 26, 2026</p>
     <a href="/">Back to homepage</a>
   </footer>
 </main>

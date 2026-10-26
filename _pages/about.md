@@ -58,7 +58,7 @@ Research Intern, advised by <a href="https://lianhui.ucsd.edu/" target="_blank" 
 Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" target="_blank" rel="noopener noreferrer">Professor Daniel Halpern-Leistner</a>.
 
 - **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026)**
-- **[Co-evolving benchmarks for mathematical reasoning](/rasch-leaderboard/) (2026–present)**
+- **Co-evolving benchmarks for mathematical reasoning (2026–present)**
 
   Developing Rasch-based scoring and adaptive solver selection for Lean proof tasks, balancing information gain, proof success and cost. Exploring how solver improvements and a changing problem bank can inform each other while maintaining comparable scores across benchmark versions.
 

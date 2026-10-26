@@ -60,8 +60,6 @@ Undergraduate Researcher, advised by <a href="https://danielhl.github.io/" targe
 - **Lean Proof Arena and LaTeX-to-Lean autoformalization (2026)**
 - **Co-evolving benchmarks for mathematical reasoning (2026–present)**
 
-  Developing Rasch-based scoring and adaptive solver selection for Lean proof tasks, balancing information gain, proof success and cost. Exploring how solver improvements and a changing problem bank can inform each other while maintaining comparable scores across benchmark versions.
-
 </details>
 
 <details class="research-card" markdown="1" open>

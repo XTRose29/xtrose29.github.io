@@ -28,8 +28,8 @@
     <div class="equation">
       p<sub>ij</sub><sup>(t)</sup> = P(solve | i, j, current estimates) = σ(s<sub>i</sub><sup>(t)</sup> − d<sub>j</sub><sup>(t)</sup>)<br>
       σ(x) = 1 / (1 + exp(−x))<br>
-      E[cost | i, j] = $0.10 × exp(c<sub>i</sub> + a<sub>j</sub>)<br>
-      E[time | i, j] = 30 seconds × exp(−v<sub>i</sub> + b<sub>j</sub>)
+      μ<sub>ij</sub><sup>C</sup> = E[cost | i, j] = $0.10 × exp(c<sub>i</sub> + a<sub>j</sub>)<br>
+      μ<sub>ij</sub><sup>T</sup> = E[time | i, j] = 30 seconds × exp(−v<sub>i</sub> + b<sub>j</sub>)
     </div>
     <p>The gap s<sub>i</sub> − d<sub>j</sub> is the log-odds of success. A zero gap gives 50%; a gap of 1 gives 73.1%. Raising both strength and difficulty by the same amount leaves the prediction unchanged. This formalizes “stronger solver on a harder node ≈ weaker solver on an easier node.” Difficulty is estimated relative to the solver population and evaluation protocol.</p>
     <p>Higher strength and speed are better; lower cost is better. Separate node effects allow a problem to be expensive without assuming it is equally difficult or slow. The $0.10 and 30-second scales define the current zero-score starting estimates; they are tunable priors, not measured averages.</p>
@@ -121,7 +121,33 @@
       I<sub>ij</sub><sup>(t)</sup> ≈ ½ log(1 + p<sub>ij</sub><sup>(t)</sup>(1 − p<sub>ij</sub><sup>(t)</sup>) V<sub>ij</sub><sup>(t)</sup>)
     </div>
     <p>Bernoulli Fisher information for the gap is largest at p = 0.5. The uncertainty term favors pairs whose parameters are still poorly measured. I is a local Gaussian/curvature information proxy about the joint parameters, not exact expected information gain or a direct guarantee of improved ranking accuracy. If the goal is specifically ranking solvers, information about strength contrasts may be a better future target.</p>
-    <p>The prototype approximates V by 1/H<sub>sᵢ</sub> + 1/H<sub>dⱼ</sub>, using diagonal curvature plus prior precision. This omits covariance and is not a calibrated posterior variance. Better uncertainty estimates and held-out calibration checks are part of the next validation step.</p>
+    <h3 id="variance">What the variance approximation means</h3>
+    <p>H<sub>sᵢ</sub> and H<sub>dⱼ</sub> are scalar diagonal entries of the Hessian of the <em>regularized success loss</em>. They measure curvature with respect to solver strength and node difficulty. The prototype uses:</p>
+    <div class="equation">
+      Ṽ<sub>ij</sub> = 1/H<sub>sᵢ</sub> + 1/H<sub>dⱼ</sub>
+    </div>
+    <p><strong>This is a diagonal-curvature heuristic, not a calibrated variance estimate.</strong> It replaces the joint precision matrix by its diagonal before inversion. In general, 1/H<sub>sᵢ</sub> is not the marginal variance of s<sub>i</sub>: taking reciprocals of Hessian diagonal entries is different from taking diagonal entries of the inverse Hessian.</p>
+    <details>
+      <summary>Curvature, full covariance, and limitations</summary>
+      <p>Let ψ contain all solver strengths and node difficulties. At a converged batch fit ψ̂, define H = ∇²[L<sub>success</sub> + (λ/2)‖ψ‖²]. With independent Gaussian priors of precision λ = 1, the relevant diagonal entries are:</p>
+      <div class="equation">
+        H<sub>sᵢ</sub> = H<sub>sᵢ,sᵢ</sub> = λ + Σ<sub>n : iₙ = i</sub> p<sub>n</sub>(1 − p<sub>n</sub>)<br>
+        H<sub>dⱼ</sub> = H<sub>dⱼ,dⱼ</sub> = λ + Σ<sub>n : jₙ = j</sub> p<sub>n</sub>(1 − p<sub>n</sub>)
+      </div>
+      <p>The sums include graded invocation events; batch probabilities are evaluated at the fitted parameters. Each event also contributes −p<sub>n</sub>(1 − p<sub>n</sub>) to its strength–difficulty off-diagonal entries. Those couplings matter because an outcome informs both the solver and the node.</p>
+      <p>A full <a href="https://mc-stan.org/docs/reference-manual/laplace.html">Laplace approximation</a> uses the inverse of the entire Hessian of the negative log posterior:</p>
+      <div class="equation">
+        Σ ≈ H<sup>−1</sup><br>
+        Var(s<sub>i</sub> − d<sub>j</sub>) ≈ Σ<sub>sᵢ,sᵢ</sub> + Σ<sub>dⱼ,dⱼ</sub> − 2Σ<sub>sᵢ,dⱼ</sub>
+      </div>
+      <p>This is H of the negative log posterior, so the inverse has a positive sign. Keeping the full matrix accounts for parameter correlations and changes the marginal variance estimates as well as the covariance term. It is still a local Gaussian approximation; it is not an exact posterior or a guarantee of interval coverage.</p>
+      <ul>
+        <li><strong>Online curvature is approximate too.</strong> Between batch fits, the implementation accumulates p(1 − p) using each event’s pre-update prediction. It does not reevaluate all previous observations at the latest parameters. The resulting diagonal values need not equal the current batch Hessian diagonal.</li>
+        <li><strong>Sparse data and weak overlap matter.</strong> Priors make the regularized Hessian invertible, but cannot create empirical comparisons between disconnected solver–node groups. Sparse or nearly all-success/all-failure data can make a local Gaussian approximation unreliable or prior-sensitive.</li>
+        <li><strong>Calibration must be checked.</strong> Correlated repeats or an inadequate scalar Rasch model can invalidate uncertainty estimates even with the full Hessian. The current proxy can distort information priorities and should not be presented as a confidence interval or proof of ranking certainty.</li>
+      </ul>
+      <p><strong>Proposed next step:</strong> evaluate full-Hessian contrast variances after converged batch fits, then check uncertainty coverage on controlled simulations and predictive calibration on held-out runs. For a contrast vector x with +1 at s<sub>i</sub> and −1 at d<sub>j</sub>, solve Hz = x and compute xᵀz; this avoids explicitly storing a dense inverse. The current sampler still uses the diagonal heuristic; this page update does not implement the full-covariance method.</p>
+    </details>
 
     <h3>Running priority</h3>
     <div class="equation">

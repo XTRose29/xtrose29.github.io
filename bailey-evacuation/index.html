@@ -131,29 +131,45 @@ function choose(a,forced=false){let xs=choices(a);let aware=parameters.block==='
 // Walk along the seating row to one of its ends first. Do not cut diagonally
 // across seated rows: the original demo accidentally did so.
 // Trace the actual row polyline rather than drawing a chord across seating.
+// Every agent must reach a row end before entering a longitudinal aisle.
+// Aisle paths are traced through successive waypoints; the orchestra-to-mezzanine
+// transition is only entered after the agent reaches the back of its seating block.
+// Coordinates are hand-traced approximations on the upright seating drawing.
 function seatToAisle(a){
- const r=a.row;
- const first=r.points[0], last=r.points[r.points.length-1];
+ const r=a.row, first=r.points[0], last=r.points[r.points.length-1];
  const dL=Math.hypot(a.x-first[0],a.y-first[1]),dR=Math.hypot(a.x-last[0],a.y-last[1]);
  let towardLast=r.zone.startsWith('loge')||r.zone==='curveR'||(r.zone!=='curveL'&&dL>dR);
- let endV=towardLast?1:0;
- const pts=[];
- const steps=Math.max(2,Math.ceil(Math.abs(a.v-endV)*44));
+ const endV=towardLast?1:0,pts=[];
+ const steps=Math.max(2,Math.ceil(Math.abs(a.v-endV)*48));
  for(let i=1;i<=steps;i++)pts.push(samplePolyline(r.points,a.v+(endV-a.v)*i/steps));
- const end=pts[pts.length-1],isLeft=end[0]<610;
+ const end=pts[pts.length-1],isLeft=end[0]<550;
  if(a.floor==='balcony'){
-  pts.push(isLeft?[177,65]:[1040,65]);
+  // Balcony aisle / stair connections remain approximate (p.5 vs p.7).
+  const side=isLeft?'L':'R';
+  if(side==='L')pts.push([180,end[1]],[177,400],[177,315],[177,65]);
+  else pts.push([1015,end[1]],[1040,400],[1040,315],[1040,65]);
  }else if(r.zone==='center'){
-  pts.push([end[0]<530?403:660,end[1]]);
-  pts.push([end[0]<530?403:660,645]);
-  pts.push([end[0]<530?345:755,675]); // assumed orchestra-to-mezzanine access connector
+  // Central blocks: travel sideways along the seating row, THEN down the
+  // bordering longitudinal aisle, THEN through an orchestra access passage.
+  const left=end[0]<530;
+  const aisle=left?[[400,465],[392,550],[381,622],[367,651],[345,675]]:
+                    [[663,465],[677,550],[704,622],[727,651],[755,675]];
+  // Move monotonically toward the back of the room (higher y).
+  const downstream=aisle.filter(p=>p[1]>end[1]+1);
+  // The first point is the entry from the row, not a shortcut across seats.
+  pts.push([left?403:660,end[1]]);
+  for(const p of downstream)if(p[1]>=end[1])pts.push(p);
+  if(pts.at(-1)[1]<675)pts.push(left?[345,675]:[755,675]);
  }else if(r.zone.startsWith('wing')){
-  pts.push([isLeft?405:695,end[1]]);
-  pts.push([isLeft?392:708,640]);
-  pts.push([isLeft?345:755,675]); // assumed access connector
+  const x=isLeft?398:702;
+  pts.push([x,end[1]]);
+  // Follow the wing aisle down, rather than cutting diagonally through rows.
+  for(const p of (isLeft?[[396,475],[392,550],[383,610],[367,650],[345,675]]:
+                         [[704,475],[708,550],[717,610],[733,650],[755,675]])){
+   if(p[1]>end[1]+1)pts.push(p);
+  }
  }else if(r.zone.startsWith('loge')){
-  pts.push([isLeft?252:848,460]);
-  pts.push([isLeft?150:950,515]);
+  pts.push([isLeft?252:848,460],[isLeft?150:950,515]);
  }else if(r.zone.startsWith('curve')){
   pts.push([isLeft?148:952,515]);
  }
